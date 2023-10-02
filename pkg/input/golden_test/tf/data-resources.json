@@ -1,0 +1,128 @@
+{
+  "format": "",
+  "format_version": "",
+  "input_type": "tf_hcl",
+  "environment_provider": "iac",
+  "meta": {
+    "filepath": "golden_test/tf/data-resources/main.tf"
+  },
+  "resources": {
+    "data.google_iam_policy": {
+      "data.google_iam_policy.all_authenticated_users": {
+        "id": "data.google_iam_policy.all_authenticated_users",
+        "resource_type": "data.google_iam_policy",
+        "namespace": "golden_test/tf/data-resources/main.tf",
+        "meta": {
+          "terraform": {
+            "provider_config": {}
+          }
+        },
+        "attributes": {
+          "binding": [
+            {
+              "members": [
+                "user:jason@fugue.co"
+              ],
+              "role": "roles/storage.admin"
+            },
+            {
+              "members": [
+                "allAuthenticatedUsers"
+              ],
+              "role": "roles/storage.objectViewer"
+            }
+          ]
+        }
+      },
+      "data.google_iam_policy.all_users": {
+        "id": "data.google_iam_policy.all_users",
+        "resource_type": "data.google_iam_policy",
+        "namespace": "golden_test/tf/data-resources/main.tf",
+        "meta": {
+          "terraform": {
+            "provider_config": {}
+          }
+        },
+        "attributes": {
+          "binding": [
+            {
+              "members": [
+                "user:jason@fugue.co"
+              ],
+              "role": "roles/storage.admin"
+            },
+            {
+              "members": [
+                "allUsers"
+              ],
+              "role": "roles/storage.objectViewer"
+            }
+          ]
+        }
+      }
+    },
+    "google_storage_bucket": {
+      "google_storage_bucket.all_authenticated_users": {
+        "id": "google_storage_bucket.all_authenticated_users",
+        "resource_type": "google_storage_bucket",
+        "namespace": "golden_test/tf/data-resources/main.tf",
+        "meta": {
+          "terraform": {
+            "provider_config": {}
+          }
+        },
+        "attributes": {
+          "force_destroy": true,
+          "name": "invalid-public-all-authenticated-iam"
+        }
+      },
+      "google_storage_bucket.all_users": {
+        "id": "google_storage_bucket.all_users",
+        "resource_type": "google_storage_bucket",
+        "namespace": "golden_test/tf/data-resources/main.tf",
+        "meta": {
+          "terraform": {
+            "provider_config": {}
+          }
+        },
+        "attributes": {
+          "force_destroy": true,
+          "name": "invalid-public-all-users-iam"
+        }
+      }
+    },
+    "google_storage_bucket_iam_policy": {
+      "google_storage_bucket_iam_policy.all_authenticated_users_policy": {
+        "id": "google_storage_bucket_iam_policy.all_authenticated_users_policy",
+        "resource_type": "google_storage_bucket_iam_policy",
+        "namespace": "golden_test/tf/data-resources/main.tf",
+        "meta": {
+          "terraform": {
+            "provider_config": {}
+          }
+        },
+        "attributes": {
+          "bucket": "invalid-public-all-authenticated-iam",
+          "policy_data": "data.google_iam_policy.all_authenticated_users"
+        }
+      },
+      "google_storage_bucket_iam_policy.all_users_policy": {
+        "id": "google_storage_bucket_iam_policy.all_users_policy",
+        "resource_type": "google_storage_bucket_iam_policy",
+        "namespace": "golden_test/tf/data-resources/main.tf",
+        "meta": {
+          "terraform": {
+            "provider_config": {}
+          }
+        },
+        "attributes": {
+          "bucket": "invalid-public-all-users-iam",
+          "policy_data": "data.google_iam_policy.all_users"
+        }
+      }
+    }
+  },
+  "scope": {
+    "filepath": "golden_test/tf/data-resources/main.tf"
+  }
+}

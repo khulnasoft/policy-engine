@@ -1,0 +1,2112 @@
+{
+  "format": "results",
+  "format_version": "1.2.0",
+  "rule_bundles": [
+    {
+      "rule_bundle": {
+        "source": "data"
+      }
+    }
+  ],
+  "results": [
+    {
+      "input": {
+        "format": "",
+        "format_version": "",
+        "input_type": "tf_hcl",
+        "environment_provider": "iac",
+        "meta": {
+          "filepath": "../examples/main.tf"
+        },
+        "resources": {
+          "aws_cloudtrail": {
+            "aws_cloudtrail.cloudtrail1": {
+              "id": "aws_cloudtrail.cloudtrail1",
+              "resource_type": "aws_cloudtrail",
+              "namespace": "../examples/main.tf",
+              "meta": {
+                "location": [
+                  {
+                    "filepath": "../examples/main.tf",
+                    "line": 71,
+                    "column": 1
+                  }
+                ],
+                "region": "us-east-1",
+                "terraform": {
+                  "provider_config": {
+                    "region": "us-east-1"
+                  }
+                }
+              },
+              "attributes": {
+                "include_global_service_events": true,
+                "name": "cloudtrail1",
+                "s3_bucket_name": "aws_s3_bucket.bucket1",
+                "s3_key_prefix": "prefix"
+              }
+            }
+          },
+          "aws_kms_key": {
+            "aws_kms_key.key": {
+              "id": "aws_kms_key.key",
+              "resource_type": "aws_kms_key",
+              "namespace": "../examples/main.tf",
+              "meta": {
+                "location": [
+                  {
+                    "filepath": "../examples/main.tf",
+                    "line": 32,
+                    "column": 1
+                  }
+                ],
+                "region": "us-east-1",
+                "terraform": {
+                  "provider_config": {
+                    "region": "us-east-1"
+                  }
+                }
+              },
+              "attributes": {
+                "deletion_window_in_days": 10,
+                "description": "This key is used to encrypt bucket objects"
+              }
+            }
+          },
+          "aws_s3_bucket": {
+            "aws_s3_bucket.aes_bucket": {
+              "id": "aws_s3_bucket.aes_bucket",
+              "resource_type": "aws_s3_bucket",
+              "namespace": "../examples/main.tf",
+              "meta": {
+                "location": [
+                  {
+                    "filepath": "../examples/main.tf",
+                    "line": 57,
+                    "column": 1
+                  }
+                ],
+                "region": "us-east-1",
+                "terraform": {
+                  "provider_config": {
+                    "region": "us-east-1"
+                  }
+                }
+              },
+              "attributes": {
+                "bucket": "i-use-aes-encryption"
+              }
+            },
+            "aws_s3_bucket.bucket1": {
+              "id": "aws_s3_bucket.bucket1",
+              "resource_type": "aws_s3_bucket",
+              "namespace": "../examples/main.tf",
+              "meta": {
+                "location": [
+                  {
+                    "filepath": "../examples/main.tf",
+                    "line": 5,
+                    "column": 1
+                  }
+                ],
+                "region": "us-east-1",
+                "terraform": {
+                  "provider_config": {
+                    "region": "us-east-1"
+                  }
+                }
+              },
+              "attributes": {
+                "bucket": "dumb-bucket"
+              }
+            },
+            "aws_s3_bucket.bucket2": {
+              "id": "aws_s3_bucket.bucket2",
+              "resource_type": "aws_s3_bucket",
+              "namespace": "../examples/main.tf",
+              "meta": {
+                "location": [
+                  {
+                    "filepath": "../examples/main.tf",
+                    "line": 9,
+                    "column": 1
+                  }
+                ],
+                "region": "us-east-1",
+                "terraform": {
+                  "provider_config": {
+                    "region": "us-east-1"
+                  }
+                }
+              },
+              "attributes": {
+                "bucket": "dumb"
+              }
+            },
+            "aws_s3_bucket.bucket3": {
+              "id": "aws_s3_bucket.bucket3",
+              "resource_type": "aws_s3_bucket",
+              "namespace": "../examples/main.tf",
+              "meta": {
+                "location": [
+                  {
+                    "filepath": "../examples/main.tf",
+                    "line": 37,
+                    "column": 1
+                  }
+                ],
+                "region": "us-east-1",
+                "terraform": {
+                  "provider_config": {
+                    "region": "us-east-1"
+                  }
+                }
+              },
+              "attributes": {
+                "bucket": "bucket3",
+                "server_side_encryption_configuration": [
+                  {
+                    "rule": [
+                      {
+                        "apply_server_side_encryption_by_default": [
+                          {
+                            "kms_master_key_id": "aws_kms_key.key",
+                            "sse_algorithm": "aws:kms"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "aws_s3_bucket_ownership_controls": {
+            "aws_s3_bucket_ownership_controls.bucket2": {
+              "id": "aws_s3_bucket_ownership_controls.bucket2",
+              "resource_type": "aws_s3_bucket_ownership_controls",
+              "namespace": "../examples/main.tf",
+              "meta": {
+                "location": [
+                  {
+                    "filepath": "../examples/main.tf",
+                    "line": 24,
+                    "column": 1
+                  }
+                ],
+                "region": "us-east-1",
+                "terraform": {
+                  "provider_config": {
+                    "region": "us-east-1"
+                  }
+                }
+              },
+              "attributes": {
+                "bucket": "dumb",
+                "rule": [
+                  {
+                    "object_ownership": "ObjectWriter"
+                  }
+                ]
+              }
+            },
+            "aws_s3_bucket_ownership_controls.bucket3": {
+              "id": "aws_s3_bucket_ownership_controls.bucket3",
+              "resource_type": "aws_s3_bucket_ownership_controls",
+              "namespace": "../examples/main.tf",
+              "meta": {
+                "location": [
+                  {
+                    "filepath": "../examples/main.tf",
+                    "line": 49,
+                    "column": 1
+                  }
+                ],
+                "region": "us-east-1",
+                "terraform": {
+                  "provider_config": {
+                    "region": "us-east-1"
+                  }
+                }
+              },
+              "attributes": {
+                "bucket": "bucket3",
+                "rule": [
+                  {
+                    "object_ownership": "BucketOwnerEnforced"
+                  }
+                ]
+              }
+            }
+          },
+          "aws_s3_bucket_server_side_encryption_configuration": {
+            "aws_s3_bucket_server_side_encryption_configuration.aes_bucket": {
+              "id": "aws_s3_bucket_server_side_encryption_configuration.aes_bucket",
+              "resource_type": "aws_s3_bucket_server_side_encryption_configuration",
+              "namespace": "../examples/main.tf",
+              "meta": {
+                "location": [
+                  {
+                    "filepath": "../examples/main.tf",
+                    "line": 61,
+                    "column": 1
+                  }
+                ],
+                "region": "us-east-1",
+                "terraform": {
+                  "provider_config": {
+                    "region": "us-east-1"
+                  }
+                }
+              },
+              "attributes": {
+                "bucket": "i-use-aes-encryption",
+                "rule": [
+                  {
+                    "apply_server_side_encryption_by_default": [
+                      {
+                        "sse_algorithm": "AES256"
+                      }
+                    ]
+                  }
+                ]
+              }
+            },
+            "aws_s3_bucket_server_side_encryption_configuration.bucket2": {
+              "id": "aws_s3_bucket_server_side_encryption_configuration.bucket2",
+              "resource_type": "aws_s3_bucket_server_side_encryption_configuration",
+              "namespace": "../examples/main.tf",
+              "meta": {
+                "location": [
+                  {
+                    "filepath": "../examples/main.tf",
+                    "line": 13,
+                    "column": 1
+                  }
+                ],
+                "region": "us-east-1",
+                "terraform": {
+                  "provider_config": {
+                    "region": "us-east-1"
+                  }
+                }
+              },
+              "attributes": {
+                "bucket": "dumb",
+                "rule": [
+                  {
+                    "apply_server_side_encryption_by_default": [
+                      {
+                        "kms_master_key_id": "aws_kms_key.key",
+                        "sse_algorithm": "aws:kms"
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "kubernetes_ingress": {
+            "kubernetes_ingress.ingress": {
+              "id": "kubernetes_ingress.ingress",
+              "resource_type": "kubernetes_ingress",
+              "namespace": "../examples/main.tf",
+              "meta": {
+                "location": [
+                  {
+                    "filepath": "../examples/main.tf",
+                    "line": 161,
+                    "column": 1
+                  }
+                ]
+              },
+              "attributes": {
+                "metadata": [
+                  {
+                    "name": "example-ingress"
+                  }
+                ],
+                "spec": [
+                  {
+                    "backend": [
+                      {
+                        "service_name": "myapp-1",
+                        "service_port": 8080
+                      }
+                    ],
+                    "rule": [
+                      {
+                        "http": [
+                          {
+                            "path": [
+                              {
+                                "backend": [
+                                  {
+                                    "service_name": "myapp-1",
+                                    "service_port": 8080
+                                  }
+                                ],
+                                "path": "/app1/*"
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ],
+                    "tls": [
+                      {
+                        "secret_name": "tls-secret"
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "kubernetes_pod": {
+            "kubernetes_pod.multiple_containers": {
+              "id": "kubernetes_pod.multiple_containers",
+              "resource_type": "kubernetes_pod",
+              "namespace": "../examples/main.tf",
+              "meta": {
+                "location": [
+                  {
+                    "filepath": "../examples/main.tf",
+                    "line": 78,
+                    "column": 1
+                  }
+                ]
+              },
+              "attributes": {
+                "metadata": [
+                  {
+                    "labels": {
+                      "app": "myapp-1"
+                    },
+                    "name": "multiple-containers"
+                  }
+                ],
+                "spec": [
+                  {
+                    "container": [
+                      {
+                        "env": [
+                          {
+                            "name": "environment",
+                            "value": "test"
+                          }
+                        ],
+                        "image": "nginx:1.7.9",
+                        "name": "example-allowed"
+                      },
+                      {
+                        "env": [
+                          {
+                            "name": "environment",
+                            "value": "test"
+                          }
+                        ],
+                        "image": "nginx:1.7.9",
+                        "name": "example-denied",
+                        "security_context": [
+                          {
+                            "privileged": true
+                          }
+                        ]
+                      },
+                      {
+                        "env": [
+                          {
+                            "name": "environment",
+                            "value": "test"
+                          }
+                        ],
+                        "image": "nginx:1.7.9",
+                        "name": "example-denied-2",
+                        "security_context": [
+                          {
+                            "privileged": true
+                          }
+                        ]
+                      }
+                    ],
+                    "init_container": [
+                      {
+                        "args": [
+                          "-c",
+                          "exit",
+                          "0"
+                        ],
+                        "command": [
+                          "/bin/sh"
+                        ],
+                        "env": [
+                          {
+                            "name": "environment",
+                            "value": "test"
+                          }
+                        ],
+                        "image": "nginx:1.7.9",
+                        "name": "example-denied-init",
+                        "security_context": [
+                          {
+                            "privileged": true
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "kubernetes_service_v1": {
+            "kubernetes_service_v1.service": {
+              "id": "kubernetes_service_v1.service",
+              "resource_type": "kubernetes_service_v1",
+              "namespace": "../examples/main.tf",
+              "meta": {
+                "location": [
+                  {
+                    "filepath": "../examples/main.tf",
+                    "line": 143,
+                    "column": 1
+                  }
+                ]
+              },
+              "attributes": {
+                "metadata": [
+                  {
+                    "name": "myapp-1"
+                  }
+                ],
+                "spec": [
+                  {
+                    "port": [
+                      {
+                        "port": 8080,
+                        "target_port": 80
+                      }
+                    ],
+                    "selector": {
+                      "app": "myapp-1"
+                    },
+                    "session_affinity": "ClientIP",
+                    "type": "NodePort"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "scope": {
+          "filepath": "../examples/main.tf"
+        }
+      },
+      "rule_results": [
+        {
+          "id": "COMPANY_0001",
+          "kind": "vulnerability",
+          "rule_bundle": {
+            "source": "data"
+          },
+          "title": "S3 bucket name contains the word 'bucket'",
+          "platform": [
+            "AWS"
+          ],
+          "description": "It is unnecessary for resource names to contain their type.",
+          "references": [
+            {
+              "url": "https://example.com/bucket-naming-conventions",
+              "title": "Some blog post"
+            },
+            {
+              "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket",
+              "title": "Resource: aws_s3_bucket"
+            }
+          ],
+          "category": "Best Practices",
+          "labels": [
+            "Naming Conventions",
+            "Pet Peeves"
+          ],
+          "service_group": "S3",
+          "controls": [
+            "CIS-AWS_v1.3.0_5.1",
+            "CIS-AWS_v1.3.0_5.2",
+            "CIS-AWS_v1.4.0_6.7"
+          ],
+          "resource_types": [
+            "aws_s3_bucket"
+          ],
+          "results": [
+            {
+              "passed": true,
+              "ignored": false,
+              "resource_id": "aws_s3_bucket.aes_bucket",
+              "resource_namespace": "../examples/main.tf",
+              "resource_type": "aws_s3_bucket",
+              "severity": "Critical",
+              "resources": [
+                {
+                  "id": "aws_s3_bucket.aes_bucket",
+                  "type": "aws_s3_bucket",
+                  "namespace": "../examples/main.tf",
+                  "location": [
+                    {
+                      "filepath": "../examples/main.tf",
+                      "line": 57,
+                      "column": 1
+                    }
+                  ],
+                  "attributes": [
+                    {
+                      "path": [
+                        "bucket"
+                      ],
+                      "location": {
+                        "filepath": "../examples/main.tf",
+                        "line": 58,
+                        "column": 3
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "passed": false,
+              "ignored": false,
+              "message": "Bucket names should not contain the word bucket, it's implied",
+              "resource_id": "aws_s3_bucket.bucket1",
+              "resource_namespace": "../examples/main.tf",
+              "resource_type": "aws_s3_bucket",
+              "remediation": "1. Find the corresponding aws_s3_bucket resource\n2. ...",
+              "severity": "Critical",
+              "resources": [
+                {
+                  "id": "aws_s3_bucket.bucket1",
+                  "type": "aws_s3_bucket",
+                  "namespace": "../examples/main.tf",
+                  "location": [
+                    {
+                      "filepath": "../examples/main.tf",
+                      "line": 5,
+                      "column": 1
+                    }
+                  ],
+                  "attributes": [
+                    {
+                      "path": [
+                        "bucket"
+                      ],
+                      "location": {
+                        "filepath": "../examples/main.tf",
+                        "line": 6,
+                        "column": 3
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "passed": true,
+              "ignored": false,
+              "resource_id": "aws_s3_bucket.bucket2",
+              "resource_namespace": "../examples/main.tf",
+              "resource_type": "aws_s3_bucket",
+              "severity": "Critical",
+              "resources": [
+                {
+                  "id": "aws_s3_bucket.bucket2",
+                  "type": "aws_s3_bucket",
+                  "namespace": "../examples/main.tf",
+                  "location": [
+                    {
+                      "filepath": "../examples/main.tf",
+                      "line": 9,
+                      "column": 1
+                    }
+                  ],
+                  "attributes": [
+                    {
+                      "path": [
+                        "bucket"
+                      ],
+                      "location": {
+                        "filepath": "../examples/main.tf",
+                        "line": 10,
+                        "column": 3
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "passed": false,
+              "ignored": false,
+              "message": "Bucket names should not contain the word bucket, it's implied",
+              "resource_id": "aws_s3_bucket.bucket3",
+              "resource_namespace": "../examples/main.tf",
+              "resource_type": "aws_s3_bucket",
+              "remediation": "1. Find the corresponding aws_s3_bucket resource\n2. ...",
+              "severity": "Critical",
+              "resources": [
+                {
+                  "id": "aws_s3_bucket.bucket3",
+                  "type": "aws_s3_bucket",
+                  "namespace": "../examples/main.tf",
+                  "location": [
+                    {
+                      "filepath": "../examples/main.tf",
+                      "line": 37,
+                      "column": 1
+                    }
+                  ],
+                  "attributes": [
+                    {
+                      "path": [
+                        "bucket"
+                      ],
+                      "location": {
+                        "filepath": "../examples/main.tf",
+                        "line": 38,
+                        "column": 3
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "package": "data.rules.khulnasoft_001.tf"
+        },
+        {
+          "kind": "vulnerability",
+          "rule_bundle": {
+            "source": "data"
+          },
+          "resource_types": [
+            "aws_s3_bucket"
+          ],
+          "results": [
+            {
+              "passed": true,
+              "ignored": false,
+              "resource_id": "aws_s3_bucket.aes_bucket",
+              "resource_namespace": "../examples/main.tf",
+              "resource_type": "aws_s3_bucket",
+              "resources": [
+                {
+                  "id": "aws_s3_bucket.aes_bucket",
+                  "type": "aws_s3_bucket",
+                  "namespace": "../examples/main.tf",
+                  "location": [
+                    {
+                      "filepath": "../examples/main.tf",
+                      "line": 57,
+                      "column": 1
+                    }
+                  ],
+                  "attributes": [
+                    {
+                      "path": [
+                        "bucket"
+                      ],
+                      "location": {
+                        "filepath": "../examples/main.tf",
+                        "line": 58,
+                        "column": 3
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "passed": false,
+              "ignored": false,
+              "message": "Bucket names should not contain the word bucket, it's implied",
+              "resource_id": "aws_s3_bucket.bucket1",
+              "resource_namespace": "../examples/main.tf",
+              "resource_type": "aws_s3_bucket",
+              "resources": [
+                {
+                  "id": "aws_s3_bucket.bucket1",
+                  "type": "aws_s3_bucket",
+                  "namespace": "../examples/main.tf",
+                  "location": [
+                    {
+                      "filepath": "../examples/main.tf",
+                      "line": 5,
+                      "column": 1
+                    }
+                  ],
+                  "attributes": [
+                    {
+                      "path": [
+                        "bucket"
+                      ],
+                      "location": {
+                        "filepath": "../examples/main.tf",
+                        "line": 6,
+                        "column": 3
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "passed": true,
+              "ignored": false,
+              "resource_id": "aws_s3_bucket.bucket2",
+              "resource_namespace": "../examples/main.tf",
+              "resource_type": "aws_s3_bucket",
+              "resources": [
+                {
+                  "id": "aws_s3_bucket.bucket2",
+                  "type": "aws_s3_bucket",
+                  "namespace": "../examples/main.tf",
+                  "location": [
+                    {
+                      "filepath": "../examples/main.tf",
+                      "line": 9,
+                      "column": 1
+                    }
+                  ],
+                  "attributes": [
+                    {
+                      "path": [
+                        "bucket"
+                      ],
+                      "location": {
+                        "filepath": "../examples/main.tf",
+                        "line": 10,
+                        "column": 3
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "passed": false,
+              "ignored": false,
+              "message": "Bucket names should not contain the word bucket, it's implied",
+              "resource_id": "aws_s3_bucket.bucket3",
+              "resource_namespace": "../examples/main.tf",
+              "resource_type": "aws_s3_bucket",
+              "resources": [
+                {
+                  "id": "aws_s3_bucket.bucket3",
+                  "type": "aws_s3_bucket",
+                  "namespace": "../examples/main.tf",
+                  "location": [
+                    {
+                      "filepath": "../examples/main.tf",
+                      "line": 37,
+                      "column": 1
+                    }
+                  ],
+                  "attributes": [
+                    {
+                      "path": [
+                        "bucket"
+                      ],
+                      "location": {
+                        "filepath": "../examples/main.tf",
+                        "line": 38,
+                        "column": 3
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "package": "data.rules.khulnasoft_002.tf"
+        },
+        {
+          "kind": "vulnerability",
+          "rule_bundle": {
+            "source": "data"
+          },
+          "resource_types": [
+            "aws_s3_bucket"
+          ],
+          "results": [
+            {
+              "passed": false,
+              "ignored": false,
+              "message": "Bucket names should not contain the word bucket, it's implied",
+              "resource_id": "aws_s3_bucket.bucket1",
+              "resource_namespace": "../examples/main.tf",
+              "resource_type": "aws_s3_bucket",
+              "resources": [
+                {
+                  "id": "aws_s3_bucket.bucket1",
+                  "type": "aws_s3_bucket",
+                  "namespace": "../examples/main.tf",
+                  "location": [
+                    {
+                      "filepath": "../examples/main.tf",
+                      "line": 5,
+                      "column": 1
+                    }
+                  ],
+                  "attributes": [
+                    {
+                      "path": [
+                        "bucket"
+                      ],
+                      "location": {
+                        "filepath": "../examples/main.tf",
+                        "line": 6,
+                        "column": 3
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "passed": false,
+              "ignored": false,
+              "message": "Bucket names should not contain the word bucket, it's implied",
+              "resource_id": "aws_s3_bucket.bucket3",
+              "resource_namespace": "../examples/main.tf",
+              "resource_type": "aws_s3_bucket",
+              "resources": [
+                {
+                  "id": "aws_s3_bucket.bucket3",
+                  "type": "aws_s3_bucket",
+                  "namespace": "../examples/main.tf",
+                  "location": [
+                    {
+                      "filepath": "../examples/main.tf",
+                      "line": 37,
+                      "column": 1
+                    }
+                  ],
+                  "attributes": [
+                    {
+                      "path": [
+                        "bucket"
+                      ],
+                      "location": {
+                        "filepath": "../examples/main.tf",
+                        "line": 38,
+                        "column": 3
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "package": "data.rules.khulnasoft_003.tf"
+        },
+        {
+          "kind": "vulnerability",
+          "rule_bundle": {
+            "source": "data"
+          },
+          "resource_types": [
+            "aws_s3_bucket"
+          ],
+          "results": [
+            {
+              "passed": true,
+              "ignored": false,
+              "resource_id": "aws_s3_bucket.aes_bucket",
+              "resource_namespace": "../examples/main.tf",
+              "resource_type": "aws_s3_bucket",
+              "resources": [
+                {
+                  "id": "aws_s3_bucket.aes_bucket",
+                  "type": "aws_s3_bucket",
+                  "namespace": "../examples/main.tf",
+                  "location": [
+                    {
+                      "filepath": "../examples/main.tf",
+                      "line": 57,
+                      "column": 1
+                    }
+                  ],
+                  "attributes": [
+                    {
+                      "path": [
+                        "bucket"
+                      ],
+                      "location": {
+                        "filepath": "../examples/main.tf",
+                        "line": 58,
+                        "column": 3
+                      }
+                    },
+                    {
+                      "path": [
+                        "bucket_prefix"
+                      ],
+                      "location": {
+                        "filepath": "../examples/main.tf",
+                        "line": 57,
+                        "column": 1
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "passed": false,
+              "ignored": false,
+              "message": "Buckets should not contain bucket, it is implied",
+              "resource_id": "aws_s3_bucket.bucket1",
+              "resource_namespace": "../examples/main.tf",
+              "resource_type": "aws_s3_bucket",
+              "resources": [
+                {
+                  "id": "aws_s3_bucket.bucket1",
+                  "type": "aws_s3_bucket",
+                  "namespace": "../examples/main.tf",
+                  "location": [
+                    {
+                      "filepath": "../examples/main.tf",
+                      "line": 5,
+                      "column": 1
+                    }
+                  ],
+                  "attributes": [
+                    {
+                      "path": [
+                        "bucket"
+                      ],
+                      "location": {
+                        "filepath": "../examples/main.tf",
+                        "line": 6,
+                        "column": 3
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "passed": true,
+              "ignored": false,
+              "resource_id": "aws_s3_bucket.bucket2",
+              "resource_namespace": "../examples/main.tf",
+              "resource_type": "aws_s3_bucket",
+              "resources": [
+                {
+                  "id": "aws_s3_bucket.bucket2",
+                  "type": "aws_s3_bucket",
+                  "namespace": "../examples/main.tf",
+                  "location": [
+                    {
+                      "filepath": "../examples/main.tf",
+                      "line": 9,
+                      "column": 1
+                    }
+                  ],
+                  "attributes": [
+                    {
+                      "path": [
+                        "bucket"
+                      ],
+                      "location": {
+                        "filepath": "../examples/main.tf",
+                        "line": 10,
+                        "column": 3
+                      }
+                    },
+                    {
+                      "path": [
+                        "bucket_prefix"
+                      ],
+                      "location": {
+                        "filepath": "../examples/main.tf",
+                        "line": 9,
+                        "column": 1
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "passed": false,
+              "ignored": false,
+              "message": "Buckets should not contain bucket, it is implied",
+              "resource_id": "aws_s3_bucket.bucket3",
+              "resource_namespace": "../examples/main.tf",
+              "resource_type": "aws_s3_bucket",
+              "resources": [
+                {
+                  "id": "aws_s3_bucket.bucket3",
+                  "type": "aws_s3_bucket",
+                  "namespace": "../examples/main.tf",
+                  "location": [
+                    {
+                      "filepath": "../examples/main.tf",
+                      "line": 37,
+                      "column": 1
+                    }
+                  ],
+                  "attributes": [
+                    {
+                      "path": [
+                        "bucket"
+                      ],
+                      "location": {
+                        "filepath": "../examples/main.tf",
+                        "line": 38,
+                        "column": 3
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "package": "data.rules.khulnasoft_004.tf"
+        },
+        {
+          "kind": "vulnerability",
+          "rule_bundle": {
+            "source": "data"
+          },
+          "resource_types": [
+            "aws_s3_bucket",
+            "aws_s3_bucket_server_side_encryption_configuration"
+          ],
+          "results": [
+            {
+              "passed": true,
+              "ignored": false,
+              "resource_id": "aws_s3_bucket.aes_bucket",
+              "resource_namespace": "../examples/main.tf",
+              "resource_type": "aws_s3_bucket",
+              "resources": [
+                {
+                  "id": "aws_s3_bucket.aes_bucket",
+                  "type": "aws_s3_bucket",
+                  "namespace": "../examples/main.tf",
+                  "location": [
+                    {
+                      "filepath": "../examples/main.tf",
+                      "line": 57,
+                      "column": 1
+                    }
+                  ],
+                  "attributes": [
+                    {
+                      "path": [
+                        "bucket"
+                      ],
+                      "location": {
+                        "filepath": "../examples/main.tf",
+                        "line": 58,
+                        "column": 3
+                      }
+                    },
+                    {
+                      "path": [
+                        "server_side_encryption_configuration"
+                      ],
+                      "location": {
+                        "filepath": "../examples/main.tf",
+                        "line": 57,
+                        "column": 1
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": "aws_s3_bucket_server_side_encryption_configuration.aes_bucket",
+                  "type": "aws_s3_bucket_server_side_encryption_configuration",
+                  "namespace": "../examples/main.tf",
+                  "location": [
+                    {
+                      "filepath": "../examples/main.tf",
+                      "line": 61,
+                      "column": 1
+                    }
+                  ],
+                  "attributes": [
+                    {
+                      "path": [
+                        "bucket"
+                      ],
+                      "location": {
+                        "filepath": "../examples/main.tf",
+                        "line": 62,
+                        "column": 3
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "passed": false,
+              "ignored": false,
+              "message": "Bucket does not specify encryption",
+              "resource_id": "aws_s3_bucket.bucket1",
+              "resource_namespace": "../examples/main.tf",
+              "resource_type": "aws_s3_bucket",
+              "resources": [
+                {
+                  "id": "aws_s3_bucket.bucket1",
+                  "type": "aws_s3_bucket",
+                  "namespace": "../examples/main.tf",
+                  "location": [
+                    {
+                      "filepath": "../examples/main.tf",
+                      "line": 5,
+                      "column": 1
+                    }
+                  ],
+                  "attributes": [
+                    {
+                      "path": [
+                        "bucket"
+                      ],
+                      "location": {
+                        "filepath": "../examples/main.tf",
+                        "line": 6,
+                        "column": 3
+                      }
+                    },
+                    {
+                      "path": [
+                        "server_side_encryption_configuration"
+                      ],
+                      "location": {
+                        "filepath": "../examples/main.tf",
+                        "line": 5,
+                        "column": 1
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "passed": true,
+              "ignored": false,
+              "resource_id": "aws_s3_bucket.bucket2",
+              "resource_namespace": "../examples/main.tf",
+              "resource_type": "aws_s3_bucket",
+              "resources": [
+                {
+                  "id": "aws_s3_bucket.bucket2",
+                  "type": "aws_s3_bucket",
+                  "namespace": "../examples/main.tf",
+                  "location": [
+                    {
+                      "filepath": "../examples/main.tf",
+                      "line": 9,
+                      "column": 1
+                    }
+                  ],
+                  "attributes": [
+                    {
+                      "path": [
+                        "bucket"
+                      ],
+                      "location": {
+                        "filepath": "../examples/main.tf",
+                        "line": 10,
+                        "column": 3
+                      }
+                    },
+                    {
+                      "path": [
+                        "server_side_encryption_configuration"
+                      ],
+                      "location": {
+                        "filepath": "../examples/main.tf",
+                        "line": 9,
+                        "column": 1
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": "aws_s3_bucket_server_side_encryption_configuration.bucket2",
+                  "type": "aws_s3_bucket_server_side_encryption_configuration",
+                  "namespace": "../examples/main.tf",
+                  "location": [
+                    {
+                      "filepath": "../examples/main.tf",
+                      "line": 13,
+                      "column": 1
+                    }
+                  ],
+                  "attributes": [
+                    {
+                      "path": [
+                        "bucket"
+                      ],
+                      "location": {
+                        "filepath": "../examples/main.tf",
+                        "line": 14,
+                        "column": 3
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "passed": true,
+              "ignored": false,
+              "resource_id": "aws_s3_bucket.bucket3",
+              "resource_namespace": "../examples/main.tf",
+              "resource_type": "aws_s3_bucket",
+              "resources": [
+                {
+                  "id": "aws_s3_bucket.bucket3",
+                  "type": "aws_s3_bucket",
+                  "namespace": "../examples/main.tf",
+                  "location": [
+                    {
+                      "filepath": "../examples/main.tf",
+                      "line": 37,
+                      "column": 1
+                    }
+                  ],
+                  "attributes": [
+                    {
+                      "path": [
+                        "bucket"
+                      ],
+                      "location": {
+                        "filepath": "../examples/main.tf",
+                        "line": 38,
+                        "column": 3
+                      }
+                    },
+                    {
+                      "path": [
+                        "server_side_encryption_configuration",
+                        0,
+                        "rule",
+                        0,
+                        "apply_server_side_encryption_by_default",
+                        0,
+                        "sse_algorithm"
+                      ],
+                      "location": {
+                        "filepath": "../examples/main.tf",
+                        "line": 43,
+                        "column": 9
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "package": "data.rules.khulnasoft_005.tf"
+        },
+        {
+          "kind": "vulnerability",
+          "rule_bundle": {
+            "source": "data"
+          },
+          "resource_types": [
+            "aws_s3_bucket",
+            "aws_s3_bucket_server_side_encryption_configuration"
+          ],
+          "results": [
+            {
+              "passed": true,
+              "ignored": false,
+              "resource_id": "aws_s3_bucket.aes_bucket",
+              "resource_namespace": "../examples/main.tf",
+              "resource_type": "aws_s3_bucket",
+              "resources": [
+                {
+                  "id": "aws_s3_bucket.aes_bucket",
+                  "type": "aws_s3_bucket",
+                  "namespace": "../examples/main.tf",
+                  "location": [
+                    {
+                      "filepath": "../examples/main.tf",
+                      "line": 57,
+                      "column": 1
+                    }
+                  ],
+                  "attributes": [
+                    {
+                      "path": [
+                        "server_side_encryption_configuration"
+                      ],
+                      "location": {
+                        "filepath": "../examples/main.tf",
+                        "line": 57,
+                        "column": 1
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": "aws_s3_bucket_server_side_encryption_configuration.aes_bucket",
+                  "type": "aws_s3_bucket_server_side_encryption_configuration",
+                  "namespace": "../examples/main.tf",
+                  "location": [
+                    {
+                      "filepath": "../examples/main.tf",
+                      "line": 61,
+                      "column": 1
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "passed": false,
+              "ignored": false,
+              "message": "Bucket does not specify encryption",
+              "resource_id": "aws_s3_bucket.bucket1",
+              "resource_namespace": "../examples/main.tf",
+              "resource_type": "aws_s3_bucket",
+              "resources": [
+                {
+                  "id": "aws_s3_bucket.bucket1",
+                  "type": "aws_s3_bucket",
+                  "namespace": "../examples/main.tf",
+                  "location": [
+                    {
+                      "filepath": "../examples/main.tf",
+                      "line": 5,
+                      "column": 1
+                    }
+                  ],
+                  "attributes": [
+                    {
+                      "path": [
+                        "server_side_encryption_configuration"
+                      ],
+                      "location": {
+                        "filepath": "../examples/main.tf",
+                        "line": 5,
+                        "column": 1
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "passed": true,
+              "ignored": false,
+              "resource_id": "aws_s3_bucket.bucket2",
+              "resource_namespace": "../examples/main.tf",
+              "resource_type": "aws_s3_bucket",
+              "resources": [
+                {
+                  "id": "aws_s3_bucket.bucket2",
+                  "type": "aws_s3_bucket",
+                  "namespace": "../examples/main.tf",
+                  "location": [
+                    {
+                      "filepath": "../examples/main.tf",
+                      "line": 9,
+                      "column": 1
+                    }
+                  ],
+                  "attributes": [
+                    {
+                      "path": [
+                        "server_side_encryption_configuration"
+                      ],
+                      "location": {
+                        "filepath": "../examples/main.tf",
+                        "line": 9,
+                        "column": 1
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": "aws_s3_bucket_server_side_encryption_configuration.bucket2",
+                  "type": "aws_s3_bucket_server_side_encryption_configuration",
+                  "namespace": "../examples/main.tf",
+                  "location": [
+                    {
+                      "filepath": "../examples/main.tf",
+                      "line": 13,
+                      "column": 1
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "passed": true,
+              "ignored": false,
+              "resource_id": "aws_s3_bucket.bucket3",
+              "resource_namespace": "../examples/main.tf",
+              "resource_type": "aws_s3_bucket",
+              "resources": [
+                {
+                  "id": "aws_s3_bucket.bucket3",
+                  "type": "aws_s3_bucket",
+                  "namespace": "../examples/main.tf",
+                  "location": [
+                    {
+                      "filepath": "../examples/main.tf",
+                      "line": 37,
+                      "column": 1
+                    }
+                  ],
+                  "attributes": [
+                    {
+                      "path": [
+                        "server_side_encryption_configuration",
+                        0,
+                        "rule",
+                        0,
+                        "apply_server_side_encryption_by_default",
+                        0,
+                        "sse_algorithm"
+                      ],
+                      "location": {
+                        "filepath": "../examples/main.tf",
+                        "line": 43,
+                        "column": 9
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "package": "data.rules.khulnasoft_005b.tf"
+        },
+        {
+          "kind": "vulnerability",
+          "rule_bundle": {
+            "source": "data"
+          },
+          "resource_types": [
+            "aws_s3_bucket"
+          ],
+          "results": [
+            {
+              "passed": true,
+              "ignored": false,
+              "resource_id": "aws_s3_bucket.aes_bucket",
+              "resource_namespace": "../examples/main.tf",
+              "resource_type": "aws_s3_bucket",
+              "resources": [
+                {
+                  "id": "aws_s3_bucket.aes_bucket",
+                  "type": "aws_s3_bucket",
+                  "namespace": "../examples/main.tf",
+                  "location": [
+                    {
+                      "filepath": "../examples/main.tf",
+                      "line": 57,
+                      "column": 1
+                    }
+                  ],
+                  "attributes": [
+                    {
+                      "path": [
+                        "server_side_encryption_configuration"
+                      ],
+                      "location": {
+                        "filepath": "../examples/main.tf",
+                        "line": 57,
+                        "column": 1
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": "aws_s3_bucket_server_side_encryption_configuration.aes_bucket",
+                  "type": "aws_s3_bucket_server_side_encryption_configuration",
+                  "namespace": "../examples/main.tf",
+                  "location": [
+                    {
+                      "filepath": "../examples/main.tf",
+                      "line": 61,
+                      "column": 1
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "passed": false,
+              "ignored": false,
+              "message": "Bucket does not specify encryption",
+              "resource_id": "aws_s3_bucket.bucket1",
+              "resource_namespace": "../examples/main.tf",
+              "resource_type": "aws_s3_bucket",
+              "resources": [
+                {
+                  "id": "aws_s3_bucket.bucket1",
+                  "type": "aws_s3_bucket",
+                  "namespace": "../examples/main.tf",
+                  "location": [
+                    {
+                      "filepath": "../examples/main.tf",
+                      "line": 5,
+                      "column": 1
+                    }
+                  ],
+                  "attributes": [
+                    {
+                      "path": [
+                        "server_side_encryption_configuration"
+                      ],
+                      "location": {
+                        "filepath": "../examples/main.tf",
+                        "line": 5,
+                        "column": 1
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "passed": true,
+              "ignored": false,
+              "resource_id": "aws_s3_bucket.bucket2",
+              "resource_namespace": "../examples/main.tf",
+              "resource_type": "aws_s3_bucket",
+              "resources": [
+                {
+                  "id": "aws_s3_bucket.bucket2",
+                  "type": "aws_s3_bucket",
+                  "namespace": "../examples/main.tf",
+                  "location": [
+                    {
+                      "filepath": "../examples/main.tf",
+                      "line": 9,
+                      "column": 1
+                    }
+                  ],
+                  "attributes": [
+                    {
+                      "path": [
+                        "server_side_encryption_configuration"
+                      ],
+                      "location": {
+                        "filepath": "../examples/main.tf",
+                        "line": 9,
+                        "column": 1
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": "aws_s3_bucket_server_side_encryption_configuration.bucket2",
+                  "type": "aws_s3_bucket_server_side_encryption_configuration",
+                  "namespace": "../examples/main.tf",
+                  "location": [
+                    {
+                      "filepath": "../examples/main.tf",
+                      "line": 13,
+                      "column": 1
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "passed": true,
+              "ignored": false,
+              "resource_id": "aws_s3_bucket.bucket3",
+              "resource_namespace": "../examples/main.tf",
+              "resource_type": "aws_s3_bucket",
+              "resources": [
+                {
+                  "id": "aws_s3_bucket.bucket3",
+                  "type": "aws_s3_bucket",
+                  "namespace": "../examples/main.tf",
+                  "location": [
+                    {
+                      "filepath": "../examples/main.tf",
+                      "line": 37,
+                      "column": 1
+                    }
+                  ],
+                  "attributes": [
+                    {
+                      "path": [
+                        "server_side_encryption_configuration",
+                        0,
+                        "rule",
+                        0,
+                        "apply_server_side_encryption_by_default",
+                        0,
+                        "sse_algorithm"
+                      ],
+                      "location": {
+                        "filepath": "../examples/main.tf",
+                        "line": 43,
+                        "column": 9
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "package": "data.rules.khulnasoft_006.tf"
+        },
+        {
+          "kind": "vulnerability",
+          "rule_bundle": {
+            "source": "data"
+          },
+          "resource_types": [
+            "kubernetes_pod"
+          ],
+          "results": [
+            {
+              "passed": false,
+              "ignored": false,
+              "message": "Pod contains container running in privileged mode",
+              "resource_id": "kubernetes_pod.multiple_containers",
+              "resource_namespace": "../examples/main.tf",
+              "resource_type": "kubernetes_pod",
+              "resources": [
+                {
+                  "id": "kubernetes_pod.multiple_containers",
+                  "type": "kubernetes_pod",
+                  "namespace": "../examples/main.tf",
+                  "location": [
+                    {
+                      "filepath": "../examples/main.tf",
+                      "line": 78,
+                      "column": 1
+                    }
+                  ],
+                  "attributes": [
+                    {
+                      "path": [
+                        "spec",
+                        0,
+                        "container",
+                        1,
+                        "security_context",
+                        0,
+                        "privileged"
+                      ],
+                      "location": {
+                        "filepath": "../examples/main.tf",
+                        "line": 122,
+                        "column": 9
+                      }
+                    },
+                    {
+                      "path": [
+                        "spec",
+                        0,
+                        "container",
+                        2,
+                        "security_context",
+                        0,
+                        "privileged"
+                      ],
+                      "location": {
+                        "filepath": "../examples/main.tf",
+                        "line": 136,
+                        "column": 9
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "package": "data.rules.khulnasoft_007.tf"
+        },
+        {
+          "kind": "vulnerability",
+          "rule_bundle": {
+            "source": "data"
+          },
+          "description": "This is rule 7, it uses an old control format",
+          "controls": [
+            "Simpsons_v1.0.0_Homer",
+            "Simpsons_v1.0.0_Marge"
+          ],
+          "resource_types": [
+            "aws_cloudtrail"
+          ],
+          "results": [
+            {
+              "passed": true,
+              "ignored": false,
+              "resource_id": "aws_cloudtrail.cloudtrail1",
+              "resource_namespace": "../examples/main.tf",
+              "resource_type": "aws_cloudtrail",
+              "resources": [
+                {
+                  "id": "aws_cloudtrail.cloudtrail1",
+                  "type": "aws_cloudtrail",
+                  "namespace": "../examples/main.tf",
+                  "location": [
+                    {
+                      "filepath": "../examples/main.tf",
+                      "line": 71,
+                      "column": 1
+                    }
+                  ],
+                  "attributes": [
+                    {
+                      "path": [
+                        "include_global_service_events"
+                      ],
+                      "location": {
+                        "filepath": "../examples/main.tf",
+                        "line": 75,
+                        "column": 3
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "package": "data.rules.khulnasoft_008.tf"
+        },
+        {
+          "kind": "vulnerability",
+          "rule_bundle": {
+            "source": "data"
+          },
+          "resource_types": [
+            "aws_s3_bucket"
+          ],
+          "results": [
+            {
+              "passed": false,
+              "ignored": false,
+              "resource_id": "aws_s3_bucket.aes_bucket",
+              "resource_namespace": "../examples/main.tf",
+              "resource_type": "aws_s3_bucket",
+              "resources": [
+                {
+                  "id": "aws_s3_bucket.aes_bucket",
+                  "type": "aws_s3_bucket",
+                  "namespace": "../examples/main.tf",
+                  "location": [
+                    {
+                      "filepath": "../examples/main.tf",
+                      "line": 57,
+                      "column": 1
+                    }
+                  ]
+                },
+                {
+                  "id": "aws_s3_bucket_server_side_encryption_configuration.aes_bucket",
+                  "type": "aws_s3_bucket_server_side_encryption_configuration",
+                  "namespace": "../examples/main.tf",
+                  "location": [
+                    {
+                      "filepath": "../examples/main.tf",
+                      "line": 61,
+                      "column": 1
+                    }
+                  ],
+                  "attributes": [
+                    {
+                      "path": [
+                        "rule",
+                        0,
+                        "apply_server_side_encryption_by_default",
+                        0
+                      ],
+                      "location": {
+                        "filepath": "../examples/main.tf",
+                        "line": 65,
+                        "column": 5
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "passed": true,
+              "ignored": false,
+              "resource_id": "aws_s3_bucket.bucket2",
+              "resource_namespace": "../examples/main.tf",
+              "resource_type": "aws_s3_bucket",
+              "resources": [
+                {
+                  "id": "aws_s3_bucket.bucket2",
+                  "type": "aws_s3_bucket",
+                  "namespace": "../examples/main.tf",
+                  "location": [
+                    {
+                      "filepath": "../examples/main.tf",
+                      "line": 9,
+                      "column": 1
+                    }
+                  ]
+                },
+                {
+                  "id": "aws_s3_bucket_server_side_encryption_configuration.bucket2",
+                  "type": "aws_s3_bucket_server_side_encryption_configuration",
+                  "namespace": "../examples/main.tf",
+                  "location": [
+                    {
+                      "filepath": "../examples/main.tf",
+                      "line": 13,
+                      "column": 1
+                    }
+                  ],
+                  "attributes": [
+                    {
+                      "path": [
+                        "rule",
+                        0,
+                        "apply_server_side_encryption_by_default",
+                        0
+                      ],
+                      "location": {
+                        "filepath": "../examples/main.tf",
+                        "line": 17,
+                        "column": 5
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "package": "data.rules.khulnasoft_009.tf"
+        },
+        {
+          "kind": "vulnerability",
+          "rule_bundle": {
+            "source": "data"
+          },
+          "resource_types": [
+            "aws_s3_bucket"
+          ],
+          "results": [
+            {
+              "passed": false,
+              "ignored": false,
+              "resource_id": "aws_s3_bucket.aes_bucket",
+              "resource_namespace": "../examples/main.tf",
+              "resource_type": "aws_s3_bucket",
+              "resources": [
+                {
+                  "id": "aws_s3_bucket.aes_bucket",
+                  "type": "aws_s3_bucket",
+                  "namespace": "../examples/main.tf",
+                  "location": [
+                    {
+                      "filepath": "../examples/main.tf",
+                      "line": 57,
+                      "column": 1
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "passed": false,
+              "ignored": false,
+              "resource_id": "aws_s3_bucket.bucket1",
+              "resource_namespace": "../examples/main.tf",
+              "resource_type": "aws_s3_bucket",
+              "resources": [
+                {
+                  "id": "aws_s3_bucket.bucket1",
+                  "type": "aws_s3_bucket",
+                  "namespace": "../examples/main.tf",
+                  "location": [
+                    {
+                      "filepath": "../examples/main.tf",
+                      "line": 5,
+                      "column": 1
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "passed": false,
+              "ignored": false,
+              "resource_id": "aws_s3_bucket.bucket2",
+              "resource_namespace": "../examples/main.tf",
+              "resource_type": "aws_s3_bucket",
+              "resources": [
+                {
+                  "id": "aws_s3_bucket.bucket2",
+                  "type": "aws_s3_bucket",
+                  "namespace": "../examples/main.tf",
+                  "location": [
+                    {
+                      "filepath": "../examples/main.tf",
+                      "line": 9,
+                      "column": 1
+                    }
+                  ]
+                },
+                {
+                  "id": "aws_s3_bucket_ownership_controls.bucket2",
+                  "type": "aws_s3_bucket_ownership_controls",
+                  "namespace": "../examples/main.tf",
+                  "location": [
+                    {
+                      "filepath": "../examples/main.tf",
+                      "line": 24,
+                      "column": 1
+                    }
+                  ],
+                  "attributes": [
+                    {
+                      "path": [
+                        "rule",
+                        0,
+                        "object_ownership"
+                      ],
+                      "location": {
+                        "filepath": "../examples/main.tf",
+                        "line": 28,
+                        "column": 5
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "passed": true,
+              "ignored": false,
+              "resource_id": "aws_s3_bucket.bucket3",
+              "resource_namespace": "../examples/main.tf",
+              "resource_type": "aws_s3_bucket",
+              "resources": [
+                {
+                  "id": "aws_s3_bucket.bucket3",
+                  "type": "aws_s3_bucket",
+                  "namespace": "../examples/main.tf",
+                  "location": [
+                    {
+                      "filepath": "../examples/main.tf",
+                      "line": 37,
+                      "column": 1
+                    }
+                  ]
+                },
+                {
+                  "id": "aws_s3_bucket_ownership_controls.bucket3",
+                  "type": "aws_s3_bucket_ownership_controls",
+                  "namespace": "../examples/main.tf",
+                  "location": [
+                    {
+                      "filepath": "../examples/main.tf",
+                      "line": 49,
+                      "column": 1
+                    }
+                  ],
+                  "attributes": [
+                    {
+                      "path": [
+                        "rule",
+                        0,
+                        "object_ownership"
+                      ],
+                      "location": {
+                        "filepath": "../examples/main.tf",
+                        "line": 53,
+                        "column": 5
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "package": "data.rules.khulnasoft_010.tf"
+        },
+        {
+          "id": "EXAMPLE-011",
+          "kind": "finding",
+          "rule_bundle": {
+            "source": "data"
+          },
+          "title": "Kubernetes pod is connected to ingress",
+          "category": "public_exposure",
+          "resource_types": [
+            "kubernetes_pod"
+          ],
+          "results": [
+            {
+              "passed": false,
+              "ignored": false,
+              "resource_id": "kubernetes_pod.multiple_containers",
+              "resource_namespace": "../examples/main.tf",
+              "resource_type": "kubernetes_pod",
+              "resources": [
+                {
+                  "id": "kubernetes_pod.multiple_containers",
+                  "type": "kubernetes_pod",
+                  "namespace": "../examples/main.tf",
+                  "location": [
+                    {
+                      "filepath": "../examples/main.tf",
+                      "line": 78,
+                      "column": 1
+                    }
+                  ]
+                }
+              ],
+              "graphs": [
+                [
+                  {
+                    "label": "exposes",
+                    "source": {
+                      "id": "kubernetes_ingress.ingress",
+                      "type": "kubernetes_ingress",
+                      "namespace": "../examples/main.tf"
+                    },
+                    "target": {
+                      "id": "kubernetes_service_v1.service",
+                      "type": "kubernetes_service_v1",
+                      "namespace": "../examples/main.tf"
+                    }
+                  },
+                  {
+                    "label": "exposes",
+                    "source": {
+                      "id": "kubernetes_service_v1.service",
+                      "type": "kubernetes_service_v1",
+                      "namespace": "../examples/main.tf"
+                    },
+                    "target": {
+                      "id": "kubernetes_pod.multiple_containers",
+                      "type": "kubernetes_pod",
+                      "namespace": "../examples/main.tf"
+                    }
+                  }
+                ]
+              ]
+            }
+          ],
+          "package": "data.rules.khulnasoft_011.tf"
+        }
+      ]
+    }
+  ]
+}

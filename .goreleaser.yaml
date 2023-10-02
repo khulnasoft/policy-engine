@@ -1,0 +1,15 @@
+builds:
+- env:
+  - CGO_ENABLED=0
+
+  goos:
+  - linux
+  - windows
+  - darwin
+
+  ldflags:
+  - -s -w -X github.com/khulnasoft/policy-engine/pkg/version.Version={{.Version}}
+
+release:
+  extra_files:
+  - glob: ./release_extra_files/*

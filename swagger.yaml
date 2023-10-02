@@ -1,0 +1,409 @@
+# © 2022-2023 Khulnasoft Limited All rights reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+---
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: Policy Engine I/O Formats
+  description: Documentation for the input and output formats used in Policy Engine
+paths:
+  /dummy:
+    get:
+      responses:
+        '200':
+          description: This path makes this spec compatible with code generators
+components:
+  schemas:
+    State:
+      description: |
+        The state format contains the state of all resources from some input. This format
+        is intended to be used as both an input and output for the policy engine.
+      type: object
+      required:
+        - format
+        - format_version
+        - input_type
+        - environment_provider
+        - resources
+      properties:
+        format:
+          type: string
+          enum: ["state"]
+        format_version:
+          type: string
+          enum: ["1.0.0"]
+        input_type:
+          type: string
+          description: |
+            The type of input that this state was generated from. This value factors into
+            which rules are run for this input.
+          enum:
+            - tf_hcl
+            - tf_plan
+            - cloud_scan
+            - cfn
+            - k8s
+            - arm
+        environment_provider:
+          type: string
+          description: |
+            The type of environment that this state was generated from. This value factors
+            into which rules are run for this input.
+          enum:
+            - aws
+            - azure
+            - google
+            - iac
+        meta:
+          type: object
+          description: |
+            This object is intended to hold any input type-specific or
+            environment-specific fields, e.g. account_id or filepath.
+          additionalProperties: {}
+        resources:
+          type: object
+          description: |
+            Resources is a map of resource type to a map of a unique resource key to a resource object.
+          additionalProperties:
+            type: object
+            additionalProperties:
+              $ref: '#/components/schemas/ResourceState'
+        scope:
+          type: object
+          description: |
+            Describes the origin of the input, e.g. filepath + branch for IaC files, or
+            account/region for cloud resources
+          additionalProperties: {}
+    ResourceState:
+      description: The state of a single resource
+      type: object
+      required:
+        - id
+        - resource_type
+        - namespace
+        - meta
+        - attributes
+      properties:
+        id:
+          type: string
+          description: |
+            The identifier of the object. This can be a natural ID. It is assumed that
+            this ID is unique within the namespace.
+        resource_type:
+          type: string
+          description: The type of the resource.
+        namespace:
+          type: string
+          description: |
+            This field is a component of uniquely identifying a resource. It will
+            resolve to different values depending on the input type and environment
+            provider. For example, in a runtime AWS environment, this will be the region.
+            For an IaC Terraform resource, this will be the module path. Customers of the
+            API can set this to something that makes sense for them and parse it back.
+        tags:
+          type: object
+          description: |
+            Tags applied to the resource. Our goal is to extract tags into a uniform
+            key->value format.
+          additionalProperties:
+            type: string
+        meta:
+          type: object
+          description: |
+            This object is intended to hold any input type-specific or 
+            environment-specific fields, e.g. provider, region, or source location.
+          additionalProperties: {}
+        attributes:
+          type: object
+          description: |
+            A map of resource attributes.
+          additionalProperties: {}
+    Results:
+      description: |
+        This is the top-level output from the Policy Engine.
+      type: object
+      required:
+        - format
+        - format_version
+        - results
+      properties:
+        format:
+          type: string
+          enum: ["results"]
+        format_version:
+          type: string
+          enum: ["1.0.0"]
+        rule_bundles:
+          type: array
+          description: Information about the rule bundles used in the evaluation
+          items:
+            $ref: '#/components/schemas/RuleBundleInfo'
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Result'
+    Result:
+      description: |
+        An object that relates an input with its rule results
+      type: object
+      required:
+        - input
+        - rule_results
+      properties:
+        input:
+          description: |
+            The input that produced these results. This field is optional.
+          $ref: '#/components/schemas/State'
+        rule_results:
+          type: array
+          description: An array of rule results objects
+          items:
+            $ref: '#/components/schemas/RuleResults'
+    RuleResults:
+      description: Container for all results associated with a single rule
+      type: object
+      required:
+        - results
+      properties:
+        id:
+          type: string
+          description: |
+            The Rule ID, e.g. KHULNASOFT_00503 or 608f97c3-a11a-4154-a88e-a2fcd18c75b0
+        kind:
+          type: string
+          description: The kind of result that this rule produces, e.g "vulnerability"
+        rule_bundle:
+          description: The rule bundle that provided this rule
+          $ref: '#/components/schemas/RuleBundle'
+        title:
+          type: string
+          description: The rule title
+        platform:
+          description: The platform describes the CSPs or other technology platform (e.g. Docker) that the rule checks for
+          type: array
+          items:
+            type: string
+        description:
+          type: string
+          description: The rule description
+        references:
+          description: Useful links relating to this rule results
+          type: array
+          items:
+            $ref: '#/components/schemas/RuleResultsReference'
+        category:
+          description: The category of the policy
+          type: string
+        labels:
+          description: An array of labels (value-less tags) associated with this policy
+          type: array
+          items:
+            type: string
+        service_group:
+          description: The service group of the primary resource associated with this policy (e.g. "EBS", "EC2")
+          type: string
+        controls:
+          type: array
+          description: A list of controls associated with this rule.
+          items:
+            type: string
+        resource_types:
+          type: array
+          description: A list of resource types that the rule uses.
+          items:
+            type: string
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/RuleResult'
+        errors:
+          description: Any errors that occurred while evaluating this rule.
+          type: array
+          items:
+            type: string
+        package:
+          description: The Rego package name that defines the rule, useful for debugging
+          type: string
+    RuleResult:
+      description: A single rule result
+      type: object
+      required:
+        - passed
+        - ignored
+      properties:
+        passed:
+          type: boolean
+          description: Whether or not this is a passing or failing result
+        ignored:
+          type: boolean
+          description: Whether or not this result is ignored
+        message:
+          type: string
+          description: An optional message that can be returned by a rule
+        resource_id:
+          type: string
+          description: The ID of the primary resource (if any) associated with this result
+        resource_namespace:
+          type: string
+          description: The namespace of the primary resource (if any) associated with this result
+        resource_type:
+          type: string
+          description: |
+            The type of resource (if any) associated with this result. This will typically
+            be used with "missing resource" rules.
+        remediation:
+          type: string
+          description: |
+            A Markdown-formatted set of remediation steps to resolve the issue identified
+            by the rule
+        severity:
+          type: string
+          description: The severity of this rule result
+          enum:
+            - critical
+            - high
+            - medium
+            - low
+            - info
+        context:
+          type: object
+          description: An arbitrary key-value map that a rule can return in its result.
+          additionalProperties: {}
+        resources:
+          type: array
+          description: |
+            A resource objects associated with this result.
+          items:
+            $ref: '#/components/schemas/RuleResultResource'
+        graphs:
+          type: array
+          description: A list of graphs returned by the rule
+          items:
+            type: array
+            description: A graph represented by an array of edges between resources
+            items:
+              $ref: '#/components/schemas/Edge'
+    RuleResultResource:
+      type: object
+      description: |
+        Identifying information for a resource and attributes associated with a rule result
+      properties:
+        id:
+          description: The ID of this resource
+          type: string
+        type:
+          description: The type of this resource
+          type: string
+        namespace:
+          description: The namespace of this resource
+          type: string
+        location:
+          description: The location of the resource in the source code.
+          $ref: '#/components/schemas/SourceLocationStack'
+        attributes:
+          description: Attributes of the resource that were associated with a rule result.
+          type: array
+          items:
+            $ref: '#/components/schemas/RuleResultResourceAttribute'
+    SourceLocationStack:
+      description: |
+        A stack of source locations. It's useful to represent locations this way for
+        IaC types that allow users to import modules or other groups of resources,
+        because we can point to where a resource definition is as well as how it was
+        imported into the top-level module.
+      type: array
+      items:
+        $ref: '#/components/schemas/SourceLocation'
+    SourceLocation:
+      description: Points to a row and column within a source file
+      type: object
+      properties:
+        filepath:
+          type: string
+        line:
+          type: integer
+        column:
+          type: integer
+    RuleResultResourceAttribute:
+      type: object
+      properties:
+        path:
+          description: The path to an attribute associated with this resource and rule result
+          type: array
+          items:
+            oneOf:
+              - type: string
+              - type: integer
+        location:
+          $ref: '#/components/schemas/SourceLocation'
+    RuleResultsReference:
+      type: object
+      properties:
+        url:
+          description: Reference to link to
+          type: string
+        title:
+          description: Title for the link
+          type: string
+      required:
+      - url
+    RuleBundleInfo:
+      type: object
+      description: Information about a rule bundle that was used in the evaluation
+      properties:
+        rule_bundle:
+          $ref: '#/components/schemas/RuleBundle'
+        errors:
+          type: array
+          description: Any errors that occurred while initializing this rule bundle
+          items:
+            type: string
+    RuleBundle:
+      description: Identifying information for a rule bundle
+      required:
+        - source
+      properties:
+        name:
+          type: string
+        source:
+          type: string
+          enum: ["data", "bundle_archive", "bundle_directory"]
+        checksum:
+          type: string
+    Edge:
+      description: |
+        A graph edge that describes a relationship between two resources
+      required:
+        - label
+        - source
+        - target
+      properties:
+        label:
+          type: string
+        source:
+          $ref: '#/components/schemas/Node'
+        target:
+          $ref: '#/components/schemas/Node'
+    Node:
+      description: A graph node that describes a resource
+      required:
+        - resource_type
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+        namespace:
+          type: string

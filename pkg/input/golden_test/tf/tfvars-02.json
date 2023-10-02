@@ -1,0 +1,41 @@
+{
+  "format": "",
+  "format_version": "",
+  "input_type": "tf_hcl",
+  "environment_provider": "iac",
+  "meta": {
+    "filepath": "golden_test/tf/tfvars-02"
+  },
+  "resources": {
+    "aws_s3_bucket": {
+      "aws_s3_bucket.bucket": {
+        "id": "aws_s3_bucket.bucket",
+        "resource_type": "aws_s3_bucket",
+        "namespace": "golden_test/tf/tfvars-02",
+        "tags": {
+          "booly": "yes",
+          "listy": "Hello",
+          "mappy": "value"
+        },
+        "meta": {
+          "region": "us-east-1",
+          "terraform": {
+            "provider_config": {
+              "region": "us-east-1"
+            }
+          }
+        },
+        "attributes": {
+          "tags": {
+            "booly": "yes",
+            "listy": "Hello",
+            "mappy": "value"
+          }
+        }
+      }
+    }
+  },
+  "scope": {
+    "filepath": "golden_test/tf/tfvars-02"
+  }
+}

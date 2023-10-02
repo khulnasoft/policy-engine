@@ -1,0 +1,100 @@
+{
+  "format": "",
+  "format_version": "",
+  "input_type": "tf_hcl",
+  "environment_provider": "iac",
+  "meta": {
+    "filepath": "golden_test/tf/kubernetes-01/main.tf"
+  },
+  "resources": {
+    "kubernetes_pod": {
+      "kubernetes_pod.multiple_containers": {
+        "id": "kubernetes_pod.multiple_containers",
+        "resource_type": "kubernetes_pod",
+        "namespace": "golden_test/tf/kubernetes-01/main.tf",
+        "meta": {},
+        "attributes": {
+          "metadata": [
+            {
+              "name": "multiple-containers"
+            }
+          ],
+          "spec": [
+            {
+              "container": [
+                {
+                  "env": [
+                    {
+                      "name": "environment",
+                      "value": "test"
+                    }
+                  ],
+                  "image": "nginx:1.7.9",
+                  "name": "example-allowed"
+                },
+                {
+                  "env": [
+                    {
+                      "name": "environment",
+                      "value": "test"
+                    }
+                  ],
+                  "image": "nginx:1.7.9",
+                  "name": "example-denied",
+                  "security_context": [
+                    {
+                      "privileged": true
+                    }
+                  ]
+                },
+                {
+                  "env": [
+                    {
+                      "name": "environment",
+                      "value": "test"
+                    }
+                  ],
+                  "image": "nginx:1.7.9",
+                  "name": "example-denied-2",
+                  "security_context": [
+                    {
+                      "privileged": true
+                    }
+                  ]
+                }
+              ],
+              "init_container": [
+                {
+                  "args": [
+                    "-c",
+                    "exit",
+                    "0"
+                  ],
+                  "command": [
+                    "/bin/sh"
+                  ],
+                  "env": [
+                    {
+                      "name": "environment",
+                      "value": "test"
+                    }
+                  ],
+                  "image": "nginx:1.7.9",
+                  "name": "example-denied-init",
+                  "security_context": [
+                    {
+                      "privileged": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  },
+  "scope": {
+    "filepath": "golden_test/tf/kubernetes-01/main.tf"
+  }
+}

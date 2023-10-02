@@ -1,0 +1,39 @@
+{
+  "format": "",
+  "format_version": "",
+  "input_type": "cfn",
+  "environment_provider": "iac",
+  "meta": {
+    "filepath": "golden_test/cfn/json-01/cfn.json"
+  },
+  "resources": {
+    "AWS::S3::Bucket": {
+      "Bucket1": {
+        "id": "Bucket1",
+        "resource_type": "AWS::S3::Bucket",
+        "namespace": "golden_test/cfn/json-01/cfn.json",
+        "meta": {},
+        "attributes": {
+          "AccessControl": "Private"
+        }
+      },
+      "Bucket2": {
+        "id": "Bucket2",
+        "resource_type": "AWS::S3::Bucket",
+        "namespace": "golden_test/cfn/json-01/cfn.json",
+        "meta": {},
+        "attributes": {
+          "AccessControl": "Private",
+          "PublicAccessBlockConfiguration": {
+            "BlockPublicAcls": true,
+            "IgnorePublicAcls": true,
+            "RestrictPublicBuckets": true
+          }
+        }
+      }
+    }
+  },
+  "scope": {
+    "filepath": "golden_test/cfn/json-01/cfn.json"
+  }
+}

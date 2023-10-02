@@ -1,0 +1,23 @@
+{
+  "format": "",
+  "format_version": "",
+  "input_type": "tf_hcl",
+  "environment_provider": "iac",
+  "meta": {
+    "filepath": "golden_test/tf/empty-resource/test.tf"
+  },
+  "resources": {
+    "data.aws_caller_identity": {
+      "data.aws_caller_identity.current": {
+        "id": "data.aws_caller_identity.current",
+        "resource_type": "data.aws_caller_identity",
+        "namespace": "golden_test/tf/empty-resource/test.tf",
+        "meta": {},
+        "attributes": {}
+      }
+    }
+  },
+  "scope": {
+    "filepath": "golden_test/tf/empty-resource/test.tf"
+  }
+}

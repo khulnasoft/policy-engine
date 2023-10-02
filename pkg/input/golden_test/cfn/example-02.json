@@ -1,0 +1,57 @@
+{
+  "format": "",
+  "format_version": "",
+  "input_type": "cfn",
+  "environment_provider": "iac",
+  "meta": {
+    "filepath": "golden_test/cfn/example-02/main.yaml"
+  },
+  "resources": {
+    "AWS::CloudTrail::Trail": {
+      "CloudTrailLogging": {
+        "id": "CloudTrailLogging",
+        "resource_type": "AWS::CloudTrail::Trail",
+        "namespace": "golden_test/cfn/example-02/main.yaml",
+        "meta": {},
+        "attributes": {
+          "EventSelectors": [
+            {
+              "DataResources": [
+                {
+                  "Type": "AWS::S3::Object",
+                  "Values": [
+                    "LoggingBucket1",
+                    "LoggingBucket2"
+                  ]
+                }
+              ],
+              "ReadWriteType": "All"
+            }
+          ],
+          "IsLogging": true,
+          "S3BucketName": "LoggingBucket",
+          "TrailName": "cf-fuguetest-trail"
+        }
+      }
+    },
+    "AWS::S3::Bucket": {
+      "LoggingBucket1": {
+        "id": "LoggingBucket1",
+        "resource_type": "AWS::S3::Bucket",
+        "namespace": "golden_test/cfn/example-02/main.yaml",
+        "meta": {},
+        "attributes": {}
+      },
+      "LoggingBucket2": {
+        "id": "LoggingBucket2",
+        "resource_type": "AWS::S3::Bucket",
+        "namespace": "golden_test/cfn/example-02/main.yaml",
+        "meta": {},
+        "attributes": {}
+      }
+    }
+  },
+  "scope": {
+    "filepath": "golden_test/cfn/example-02/main.yaml"
+  }
+}

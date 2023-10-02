@@ -1,0 +1,146 @@
+// © 2022-2023 Khulnasoft Limited All rights reserved.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+package input
+
+import (
+	"encoding/json"
+	"fmt"
+	"sort"
+
+	"github.com/khulnasoft/policy-engine/pkg/models"
+)
+
+type cachedLocation struct {
+	LocationStack LocationStack
+	Error         error
+}
+
+// Loader loads and collects IaC configurations using a given Detector. It provides
+// methods to load and transform configurations into the format expected by the engine
+// package.
+type Loader struct {
+	detector       Detector
+	configurations map[string]IACConfiguration
+
+	// The corresponding key in configurations for every loaded path.
+	//
+	// For example, if you have a HCL configuration under "src/vpc", this may
+	// contain many paths, such as "src/vpc/.terraform/modules/vpc/main.tf".
+	// This map can be used to map those additional paths back to the canonical
+	// input path, "src/vpc".
+	loadedPaths map[string]string
+
+	locationCache map[string]cachedLocation
+}
+
+// NewLoader constructs a Loader using the given Detector.
+func NewLoader(detector Detector) Loader {
+	return Loader{
+		detector:       detector,
+		configurations: map[string]IACConfiguration{},
+		loadedPaths:    map[string]string{},
+		locationCache:  map[string]cachedLocation{},
+	}
+}
+
+// Load invokes this Loader's detector on an input and stores any resulting
+// configuration. This method will return true if a configuration is detected and loaded
+// and false otherwise.
+func (l *Loader) Load(detectable Detectable, detectOpts DetectOptions) (bool, error) {
+	path := detectable.GetPath()
+	if _, ok := l.loadedPaths[path]; ok {
+		// Do not load any files that are already loaded.  E.g. if you have
+		//
+		//     foo/main.tf
+		//     foo/module/bar.tf
+		//
+		// And `foo/` includes `foo/module/bar.tf`, we do not want to load the
+		// latter again separately.
+		return false, nil
+	}
+	conf, err := detectable.DetectType(l.detector, detectOpts)
+	if err != nil {
+		return false, err
+	}
+	if conf != nil {
+		l.configurations[path] = conf
+		l.loadedPaths[path] = path
+		for _, p := range conf.LoadedFiles() {
+			l.loadedPaths[p] = path
+		}
+		return true, nil
+	} else {
+		return false, nil
+	}
+}
+
+// ToStates will convert the configurations in this Loader to State structs which can be
+// used by the engine package.
+func (l *Loader) ToStates() []models.State {
+	keys := []string{}
+	for k := range l.configurations {
+		keys = append(keys, k)
+	}
+	sort.Strings(keys)
+	states := []models.State{}
+	for _, k := range keys {
+		states = append(states, l.configurations[k].ToState())
+	}
+	return states
+}
+
+// Location takes a file and attribute path and returns the location of the resource
+// or attribute.
+func (l *Loader) Location(path string, attributePath []interface{}) (LocationStack, error) {
+	canonical, ok := l.loadedPaths[path]
+	if !ok {
+		return nil, fmt.Errorf("%w: unrecognized file path %v", UnableToResolveLocation, path)
+	}
+
+	attribute, err := json.Marshal(attributePath)
+	if err != nil {
+		location, err := l.configurations[canonical].Location(attributePath)
+		if err != nil {
+			err = fmt.Errorf("%w: %v", UnableToResolveLocation, err)
+		}
+		return location, err
+	}
+
+	key := path + ":" + string(attribute)
+	if cached, ok := l.locationCache[key]; ok {
+		return cached.LocationStack, cached.Error
+	} else {
+		location, err := l.configurations[canonical].Location(attributePath)
+		if err != nil {
+			err = fmt.Errorf("%w: %v", UnableToResolveLocation, err)
+		}
+		l.locationCache[key] = cachedLocation{location, err}
+		return location, err
+	}
+}
+
+// Count returns the number of configurations contained in this Loader.
+func (l *Loader) Count() int {
+	return len(l.configurations)
+}
+
+// Errors returns the non-fatal errors associated with each IACConfiguration.
+func (l *Loader) Errors() map[string][]error {
+	errors := map[string][]error{}
+	for k, config := range l.configurations {
+		errors[k] = config.Errors()
+	}
+	return errors
+}

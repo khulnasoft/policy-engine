@@ -1,0 +1,49 @@
+{
+  "format": "",
+  "format_version": "",
+  "input_type": "tf_plan",
+  "environment_provider": "iac",
+  "meta": {
+    "filepath": "golden_test/tfplan/example-04/plan.json"
+  },
+  "resources": {
+    "aws_s3_bucket": {
+      "aws_s3_bucket.example": {
+        "id": "aws_s3_bucket.example",
+        "resource_type": "aws_s3_bucket",
+        "namespace": "golden_test/tfplan/example-04/plan.json",
+        "meta": {
+          "region": "us-west-2",
+          "terraform": {
+            "provider_config": {
+              "region": "us-west-2"
+            }
+          },
+          "tfplan": {
+            "resource_actions": [
+              "create"
+            ]
+          }
+        },
+        "attributes": {
+          "acl": "private",
+          "bucket_prefix": "example",
+          "cors_rule": [],
+          "force_destroy": false,
+          "grant": [],
+          "lifecycle_rule": [],
+          "logging": [],
+          "object_lock_configuration": [],
+          "policy": null,
+          "replication_configuration": [],
+          "server_side_encryption_configuration": [],
+          "tags": null,
+          "website": []
+        }
+      }
+    }
+  },
+  "scope": {
+    "filepath": "golden_test/tfplan/example-04/plan.json"
+  }
+}

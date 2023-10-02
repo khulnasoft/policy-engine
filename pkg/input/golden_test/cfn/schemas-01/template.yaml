@@ -1,0 +1,33 @@
+# © 2022-2023 Khulnasoft Limited All rights reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+Resources:
+  Vpc01:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: "10.0.0.0/16"
+      EnableDnsHostnames: "true" # string should be a bool
+      Tags:
+      - Key: Group
+        Value: 5  # int should be a string
+  SecurityGroup01:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: 1.2  # number should be a string
+      VpcId: !Ref Vpc01
+      SecurityGroupIngress:
+      - CidrIp: "0.0.0.0/0"
+        FromPort: "22"  # string should be a int
+        ToPort: 22  # int should stay int
+        IpProtocol: "tcp"

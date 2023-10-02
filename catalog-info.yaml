@@ -1,0 +1,11 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: policy-engine
+  annotations:
+    github.com/project-slug: khulnasoft/policy-engine
+    github.com/team-slug: khulnasoft/cloud-engines
+spec:
+  type: external-library
+  lifecycle: "-"
+  owner: cloud-engines

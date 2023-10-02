@@ -1,0 +1,170 @@
+{
+  "format": "",
+  "format_version": "",
+  "input_type": "tf_hcl",
+  "environment_provider": "iac",
+  "meta": {
+    "filepath": "golden_test/tf/tags/main.tf"
+  },
+  "resources": {
+    "aws_autoscaling_group": {
+      "aws_autoscaling_group.example": {
+        "id": "aws_autoscaling_group.example",
+        "resource_type": "aws_autoscaling_group",
+        "namespace": "golden_test/tf/tags/main.tf",
+        "tags": {
+          "Stage": "Dev"
+        },
+        "meta": {
+          "region": "us-west-2",
+          "terraform": {
+            "provider_config": {
+              "region": "us-west-2"
+            }
+          }
+        },
+        "attributes": {
+          "availability_zones": [
+            "us-east-1a"
+          ],
+          "desired_capacity": 1,
+          "launch_template": [
+            {
+              "id": "aws_launch_template.example",
+              "version": "$Latest"
+            }
+          ],
+          "max_size": 1,
+          "min_size": 1,
+          "provider": "aws",
+          "tag": [
+            {
+              "key": "Stage",
+              "propagate_at_launch": true,
+              "value": "Dev"
+            }
+          ]
+        }
+      }
+    },
+    "aws_launch_template": {
+      "aws_launch_template.example": {
+        "id": "aws_launch_template.example",
+        "resource_type": "aws_launch_template",
+        "namespace": "golden_test/tf/tags/main.tf",
+        "meta": {
+          "region": "us-west-2",
+          "terraform": {
+            "provider_config": {
+              "region": "us-west-2"
+            }
+          }
+        },
+        "attributes": {
+          "image_id": "ami-1a2b3c",
+          "instance_type": "t2.micro",
+          "name_prefix": "example",
+          "provider": "aws"
+        }
+      }
+    },
+    "aws_s3_bucket": {
+      "aws_s3_bucket.example": {
+        "id": "aws_s3_bucket.example",
+        "resource_type": "aws_s3_bucket",
+        "namespace": "golden_test/tf/tags/main.tf",
+        "tags": {
+          "Stage": "Prod"
+        },
+        "meta": {
+          "region": "us-west-2",
+          "terraform": {
+            "provider_config": {
+              "region": "us-west-2"
+            }
+          }
+        },
+        "attributes": {
+          "bucket_prefix": "example",
+          "provider": "aws",
+          "tags": {
+            "Stage": "Prod"
+          }
+        }
+      }
+    },
+    "google_compute_instance": {
+      "google_compute_instance.default": {
+        "id": "google_compute_instance.default",
+        "resource_type": "google_compute_instance",
+        "namespace": "golden_test/tf/tags/main.tf",
+        "tags": {
+          "bar": "",
+          "foo": ""
+        },
+        "meta": {
+          "terraform": {
+            "provider_config": {}
+          }
+        },
+        "attributes": {
+          "boot_disk": [
+            {
+              "initialize_params": [
+                {
+                  "image": "debian-cloud/debian-9"
+                }
+              ]
+            }
+          ],
+          "machine_type": "e2-medium",
+          "name": "test",
+          "network_interface": [
+            {
+              "access_config": [
+                {}
+              ],
+              "network": "default"
+            }
+          ],
+          "scratch_disk": [
+            {
+              "interface": "SCSI"
+            }
+          ],
+          "tags": [
+            "foo",
+            "bar"
+          ],
+          "zone": "us-central1-a"
+        }
+      }
+    },
+    "google_storage_bucket": {
+      "google_storage_bucket.example": {
+        "id": "google_storage_bucket.example",
+        "resource_type": "google_storage_bucket",
+        "namespace": "golden_test/tf/tags/main.tf",
+        "tags": {
+          "Stage": "Prod"
+        },
+        "meta": {
+          "terraform": {
+            "provider_config": {}
+          }
+        },
+        "attributes": {
+          "labels": {
+            "Stage": "Prod"
+          },
+          "location": "US",
+          "name": "example",
+          "provider": "google"
+        }
+      }
+    }
+  },
+  "scope": {
+    "filepath": "golden_test/tf/tags/main.tf"
+  }
+}

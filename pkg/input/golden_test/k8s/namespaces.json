@@ -1,0 +1,81 @@
+{
+  "format": "",
+  "format_version": "",
+  "input_type": "k8s",
+  "environment_provider": "iac",
+  "meta": {
+    "filepath": "golden_test/k8s/namespaces/manifest.yaml"
+  },
+  "resources": {
+    "Pod": {
+      "default.somepod": {
+        "id": "somepod",
+        "resource_type": "Pod",
+        "namespace": "default",
+        "meta": {},
+        "attributes": {
+          "apiVersion": "v1",
+          "kind": "Pod",
+          "metadata": {
+            "name": "somepod"
+          },
+          "spec": {
+            "containers": [
+              {
+                "image": "k8s.gcr.io/pause",
+                "name": "pause1"
+              }
+            ]
+          }
+        }
+      },
+      "ns0.somepod": {
+        "id": "somepod",
+        "resource_type": "Pod",
+        "namespace": "ns0",
+        "meta": {},
+        "attributes": {
+          "apiVersion": "v1",
+          "kind": "Pod",
+          "metadata": {
+            "name": "somepod",
+            "namespace": "ns0"
+          },
+          "spec": {
+            "containers": [
+              {
+                "image": "k8s.gcr.io/pause",
+                "name": "pause1"
+              }
+            ]
+          }
+        }
+      },
+      "ns1.somepod": {
+        "id": "somepod",
+        "resource_type": "Pod",
+        "namespace": "ns1",
+        "meta": {},
+        "attributes": {
+          "apiVersion": "v1",
+          "kind": "Pod",
+          "metadata": {
+            "name": "somepod",
+            "namespace": "ns1"
+          },
+          "spec": {
+            "containers": [
+              {
+                "image": "k8s.gcr.io/pause",
+                "name": "pause1"
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  "scope": {
+    "filepath": "golden_test/k8s/namespaces/manifest.yaml"
+  }
+}

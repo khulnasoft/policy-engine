@@ -1,0 +1,26 @@
+{
+  "format": "",
+  "format_version": "",
+  "input_type": "cfn",
+  "environment_provider": "iac",
+  "meta": {
+    "filepath": "golden_test/cfn/params-01/main.yml"
+  },
+  "resources": {
+    "Server": {
+      "MyServer": {
+        "id": "MyServer",
+        "resource_type": "Server",
+        "namespace": "golden_test/cfn/params-01/main.yml",
+        "meta": {},
+        "attributes": {
+          "TheHost": "0.0.0.0",
+          "ThePort": 80
+        }
+      }
+    }
+  },
+  "scope": {
+    "filepath": "golden_test/cfn/params-01/main.yml"
+  }
+}

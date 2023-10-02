@@ -1,0 +1,42 @@
+{
+  "metadata": {
+    "id": "COMPANY_0001",
+    "title": "S3 bucket name contains the word 'bucket'",
+    "description": "It is unnecessary for resource names to contain their type.",
+    "platform": [
+      "AWS"
+    ],
+    "remediation": {
+      "console": "1. Go to the AWS console\n2. Navigate to the S3 service page\n3. ...",
+      "cloudformation": "1. Find the corresponding AWS::S3::Bucket resource\n2. ...",
+      "terraform": "1. Find the corresponding aws_s3_bucket resource\n2. ..."
+    },
+    "references": {
+        "general": [
+          {
+            "title": "Some blog post",
+            "url": "https://example.com/bucket-naming-conventions"
+          }
+        ],
+        "terraform": [
+          {
+            "title": "Resource: aws_s3_bucket",
+            "url": "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket"
+          }
+        ]
+    },
+    "category": "Best Practices",
+    "labels": [
+      "Naming Conventions",
+      "Pet Peeves"
+    ],
+    "service_group": "S3",
+    "controls": [
+      "CIS-AWS_v1.3.0_5.1",
+      "CIS-AWS_v1.3.0_5.2",
+      "CIS-AWS_v1.4.0_6.7"
+    ],
+    "severity": "Critical",
+    "custom_field": "Hello! I am a custom field. I should not end up in the output for now"
+  }
+}

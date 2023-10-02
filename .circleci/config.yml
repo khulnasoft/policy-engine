@@ -1,0 +1,57 @@
+version: 2.1
+
+orbs:
+  prodsec: khulnasoft/prodsec-orb@1.0
+  khulnasoft: khulnasoft/khulnasoft@1
+
+jobs:
+  # All Khulnasoft scanning jobs use a KHULNASOFT_TOKEN from the tiki-khulnasoft Circle context,
+  # which correponds to the tiki-khulnasoft-circle-context service account in
+  # https://app.khulnasoft.io/org/cloud-cloud/manage/service-accounts
+  # It's not in 1password, just rotate it and configure it in Circle directly if
+  # needed.
+  scan-code:
+    resource_class: medium
+    docker:
+      - image: cimg/go:1.20
+    steps:
+      - checkout
+      - khulnasoft/scan:
+          organization: cloud-cloud
+          command: code test
+          fail-on-issues: true
+          severity-threshold: high
+          monitor-on-build: false
+
+  scan-deps:
+    resource_class: medium
+    docker:
+      - image: cimg/go:1.20
+    steps:
+      - checkout
+      - khulnasoft/scan:
+          organization: cloud-cloud
+          additional-arguments: --all-projects
+          fail-on-issues: true
+          severity-threshold: high
+          monitor-on-build: false
+
+workflows:
+  version: 2
+  CICD:
+    jobs:
+      - prodsec/secrets-scan:
+          name: Scan repository for secrets
+          context:
+            - khulnasoft-bot-slack
+          channel: group-cloud-security-vulnerabilities-alerts
+
+      - scan-code:
+          name: Scan Code
+          context:
+            - tiki-khulnasoft
+
+      - scan-deps:
+          name: Scan Dependencies
+          context:
+            - tiki-khulnasoft

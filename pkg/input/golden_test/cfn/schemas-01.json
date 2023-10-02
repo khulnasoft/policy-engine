@@ -1,0 +1,55 @@
+{
+  "format": "",
+  "format_version": "",
+  "input_type": "cfn",
+  "environment_provider": "iac",
+  "meta": {
+    "filepath": "golden_test/cfn/schemas-01/template.yaml"
+  },
+  "resources": {
+    "AWS::EC2::SecurityGroup": {
+      "SecurityGroup01": {
+        "id": "SecurityGroup01",
+        "resource_type": "AWS::EC2::SecurityGroup",
+        "namespace": "golden_test/cfn/schemas-01/template.yaml",
+        "meta": {},
+        "attributes": {
+          "GroupDescription": "1.200000",
+          "SecurityGroupIngress": [
+            {
+              "CidrIp": "0.0.0.0/0",
+              "FromPort": 22,
+              "IpProtocol": "tcp",
+              "ToPort": 22
+            }
+          ],
+          "VpcId": "Vpc01"
+        }
+      }
+    },
+    "AWS::EC2::VPC": {
+      "Vpc01": {
+        "id": "Vpc01",
+        "resource_type": "AWS::EC2::VPC",
+        "namespace": "golden_test/cfn/schemas-01/template.yaml",
+        "tags": {
+          "Group": "5"
+        },
+        "meta": {},
+        "attributes": {
+          "CidrBlock": "10.0.0.0/16",
+          "EnableDnsHostnames": true,
+          "Tags": [
+            {
+              "Key": "Group",
+              "Value": "5"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "scope": {
+    "filepath": "golden_test/cfn/schemas-01/template.yaml"
+  }
+}
