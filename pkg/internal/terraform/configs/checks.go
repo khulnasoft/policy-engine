@@ -4,8 +4,8 @@ import (
 	"fmt"
 
 	"github.com/hashicorp/hcl/v2"
-	"github.com/hashicorp/terraform/internal/addrs"
-	"github.com/hashicorp/terraform/internal/lang"
+	"github.com/khulnasoft/policy-engine/pkg/internal/terraform/addrs"
+	"github.com/khulnasoft/policy-engine/pkg/internal/terraform/lang"
 )
 
 // CheckRule represents a configuration-defined validation rule, precondition,

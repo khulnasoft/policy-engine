@@ -9,7 +9,7 @@ import (
 	"io/ioutil"
 	"os"
 
-	"github.com/hashicorp/terraform/internal/addrs"
+	"github.com/khulnasoft/policy-engine/pkg/internal/terraform/addrs"
 )
 
 // MockSource is an in-memory-only, statically-configured source intended for

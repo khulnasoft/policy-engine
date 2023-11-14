@@ -1,4 +1,4 @@
-This Contributor Licence Agreement (“Agreement”) sets out the terms under which contributions are made to open source projects of Khulnasoft Ltd (“Vulnmap”) by or on behalf of the Contributor. This Agreement is legally binding on the Contributor.
+This Contributor Licence Agreement (“Agreement”) sets out the terms under which contributions are made to open source projects of Vulnmap Ltd (“Vulnmap”) by or on behalf of the Contributor. This Agreement is legally binding on the Contributor.
 
 Who the “Contributor” is depends on whether the person submitting the contribution is a private individual acting on their own behalf, or is acting on behalf of someone else (for example, their employer). The “Contributor” in this Agreement is therefore either: (i) if the individual who Submits a Contribution does so on behalf of their employer or another Legal Entity, any Legal Entity on behalf of whom a Contribution has been received by Vulnmap; or in all other cases (ii) the individual who Submits a Contribution to Vulnmap. "Legal Entity" means an entity which is not a natural person (for example, a limited company or corporation).
 

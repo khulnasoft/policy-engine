@@ -5,8 +5,8 @@ import (
 
 	"github.com/hashicorp/hcl/v2"
 
-	"github.com/hashicorp/terraform/internal/addrs"
-	"github.com/hashicorp/terraform/internal/experiments"
+	"github.com/khulnasoft/policy-engine/pkg/internal/terraform/addrs"
+	"github.com/khulnasoft/policy-engine/pkg/internal/terraform/experiments"
 )
 
 // Module is a container for a set of configuration constructs that are

@@ -9,7 +9,7 @@ import (
 	"github.com/apparentlymart/go-versions/versions"
 	"github.com/apparentlymart/go-versions/versions/constraints"
 
-	"github.com/hashicorp/terraform/internal/addrs"
+	"github.com/khulnasoft/policy-engine/pkg/internal/terraform/addrs"
 )
 
 // Version represents a particular single version of a provider.
