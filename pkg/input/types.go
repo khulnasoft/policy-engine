@@ -108,7 +108,7 @@ var CloudFormation = &Type{
 	Aliases: []string{"cloudformation"},
 }
 
-// CloudScan represents inputs from a Khulnasoft Cloud Scan.
+// CloudScan represents inputs from a Vulnmap Cloud Scan.
 var CloudScan = &Type{
 	Name:    "cloud_scan",
 	Aliases: []string{"cloud-scan"},

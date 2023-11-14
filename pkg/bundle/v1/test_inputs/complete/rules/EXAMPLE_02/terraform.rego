@@ -14,7 +14,7 @@
 
 package rules.EXAMPLE_02.terraform
 
-import data.khulnasoft
+import data.vulnmap
 
 input_type := "tf"
 
@@ -25,7 +25,7 @@ metadata := {
 	"title": "Order includes cheeseburger pizza",
 }
 
-menu_items := khulnasoft.resources("data.dominos_menu_item")
+menu_items := vulnmap.resources("data.dominos_menu_item")
 
 includes_cheeseburger(menu_item) {
 	term := menu_item.query_string[_]

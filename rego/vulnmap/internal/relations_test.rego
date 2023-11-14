@@ -12,71 +12,71 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-package khulnasoft_test
+package vulnmap_test
 
-import data.khulnasoft
+import data.vulnmap
 import future.keywords.every
 
 check_relations {
-	bucket_1 := khulnasoft.resources("bucket")[_]
+	bucket_1 := vulnmap.resources("bucket")[_]
 	bucket_1.id == "bucket_1"
 
-	settings_1 := khulnasoft.relates(bucket_1, "bucket_settings")
+	settings_1 := vulnmap.relates(bucket_1, "bucket_settings")
 	count(settings_1) == 1
 
-	settings_1_bucket := khulnasoft.back_relates("bucket_settings", settings_1[_])
+	settings_1_bucket := vulnmap.back_relates("bucket_settings", settings_1[_])
 	count(settings_1_bucket) == 1
 	settings_1_bucket[_] == bucket_1
 
-	logging_1 := khulnasoft.relates(bucket_1, "bucket_logging")
+	logging_1 := vulnmap.relates(bucket_1, "bucket_logging")
 	count(logging_1) == 1
 
-	logging_1_bucket := khulnasoft.back_relates("bucket_logging", logging_1[_])
+	logging_1_bucket := vulnmap.back_relates("bucket_logging", logging_1[_])
 	count(logging_1_bucket) == 1
 	logging_1_bucket[_] == bucket_1
 
-	every _, acl in khulnasoft.resources("bucket_acl") {
-		acl_bucket := khulnasoft.back_relates("bucket_acl", acl)
+	every _, acl in vulnmap.resources("bucket_acl") {
+		acl_bucket := vulnmap.back_relates("bucket_acl", acl)
 		count(acl_bucket) == 1
 
-		acl_bucket_acl := khulnasoft.relates(acl_bucket[_], "bucket_acl")
+		acl_bucket_acl := vulnmap.relates(acl_bucket[_], "bucket_acl")
 		count(acl_bucket_acl) == 1
 		acl_bucket_acl[_] == acl
 	}
 
 	# Check that we return empty arrays when appropriate.
-	non_existing_relation := khulnasoft.relates(bucket_1, "bucket_foobar")
+	non_existing_relation := vulnmap.relates(bucket_1, "bucket_foobar")
 	is_array(non_existing_relation)
 	count(non_existing_relation) == 0
 }
 
 check_annotated_relations {
-	sg1 := khulnasoft.resources("security_group")[_]
-	out := khulnasoft.relates_with(sg1, "security_group")[_]
+	sg1 := vulnmap.resources("security_group")[_]
+	out := vulnmap.relates_with(sg1, "security_group")[_]
 
-	[sg1_egress, sg1_egress_ann] := khulnasoft.relates_with(sg1, "security_group")[_]
+	[sg1_egress, sg1_egress_ann] := vulnmap.relates_with(sg1, "security_group")[_]
 	sg1_egress.id == "security_group_2"
 	sg1_egress_ann.type == "egress"
 	sg1_egress_ann.port == 1
 
-	[back_to_sg1, back_to_sg1_ann] := khulnasoft.back_relates_with("security_group", sg1_egress)[_]
+	[back_to_sg1, back_to_sg1_ann] := vulnmap.back_relates_with("security_group", sg1_egress)[_]
 	back_to_sg1 == sg1
 	back_to_sg1_ann.type == "egress"
 	back_to_sg1_ann.port == 1
 
-	[sg1_ingress, sg1_ingress_ann] := khulnasoft.relates_with(sg1, "security_group")[_]
+	[sg1_ingress, sg1_ingress_ann] := vulnmap.relates_with(sg1, "security_group")[_]
 	sg1_ingress.id == "security_group_1000"
 	sg1_ingress_ann.type == "ingress"
 	sg1_ingress_ann.port == 1
 
-	lb := khulnasoft.resources("load_balancer")[_]
-	[app, app_ann] := khulnasoft.relates_with(lb, "forwards_to")[_]
+	lb := vulnmap.resources("load_balancer")[_]
+	[app, app_ann] := vulnmap.relates_with(lb, "forwards_to")[_]
 	app_ann.port == 80
 	app.id == "application_1"
 }
 
 test_relations {
-	# See also `rego/khulnasoft/internal/relations_example.rego` for the relations
+	# See also `rego/vulnmap/internal/relations_example.rego` for the relations
 	# definition.
 	check_relations with input as mock_input_relations
 }
@@ -140,7 +140,7 @@ mock_input_relations := ret {
 	}
 
 	ret := {
-		"khulnasoft_relations_test": true,
+		"vulnmap_relations_test": true,
 		"resources": {
 			"bucket": buckets,
 			"bucket_settings": bucket_settings,
@@ -207,7 +207,7 @@ mock_input_annotated_relations := ret {
 	}
 
 	ret := {
-		"khulnasoft_relations_test": true,
+		"vulnmap_relations_test": true,
 		"resources": {
 			"security_group": security_group,
 			"load_balancer": load_balancer,

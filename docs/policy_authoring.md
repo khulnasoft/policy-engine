@@ -19,7 +19,7 @@ concepts as well how to test policies.
     - [Using `deny` with a secondary resource](#using-deny-with-a-secondary-resource)
   - [Testing policies](#testing-policies)
     - [Creating test fixtures from IaC](#creating-test-fixtures-from-iac)
-    - [Creating test fixtures from Khulnasoft Cloud](#creating-test-fixtures-from-khulnasoft-cloud)
+    - [Creating test fixtures from Vulnmap Cloud](#creating-test-fixtures-from-vulnmap-cloud)
     - [Creating test fixtures without `policy-engine`](#creating-test-fixtures-without-policy-engine)
     - [Using test fixtures](#using-test-fixtures)
     - [Using the REPL](#using-the-repl)
@@ -87,13 +87,13 @@ generate a fixture for the example terraform file we are using like this:
 
     ./policy-engine fixture examples/main.tf >examples/tests/fixture.rego
 
-### Creating test fixtures from Khulnasoft Cloud
+### Creating test fixtures from Vulnmap Cloud
 
-You can also fetch resources from the Khulnasoft Cloud API and use them to generate
+You can also fetch resources from the Vulnmap Cloud API and use them to generate
 a test fixture:
 
 ```sh
-KHULNASOFT_TOKEN='<your khulnasoft token>' \
+VULNMAP_TOKEN='<your vulnmap token>' \
 ./policy-engine fixture \
   --cloud.org '<your org ID>' \
   --cloud.resource-id '<some resource ID>' \
@@ -135,7 +135,7 @@ operation:
 Running with an input is intended to be used to debug policy code with some real input.
 Running without an input is intended to be used to debug tests.
 
-Both modes of operation use the ["pure rego" version](rego/khulnasoft.rego) of the `khulnasoft` API
+Both modes of operation use the ["pure rego" version](rego/vulnmap.rego) of the `vulnmap` API
 rather than the custom built-ins used by the `run` command. In practice, these should
 behave the same.
 
@@ -147,7 +147,7 @@ rules are evaluated by:
 * Parsing the input into a `State` object
 * Setting the `input` document to the state object
   * This can be useful for inspecting the input from within the REPL, but policy code
-    must use functions from the khulnasoft API like khulnasoft.resources() to access the input, to
+    must use functions from the vulnmap API like vulnmap.resources() to access the input, to
     ensure compatibility with the production (non-repl) engine.
 
 ##### Examples
@@ -158,7 +158,7 @@ Introspecting a multi-resource policy:
 # Invoking the REPL with an IaC input
 $ ./policy-engine repl -d examples examples/main.tf
 # Switching to the package of a multi-resource policy
-> package rules.khulnasoft_003.tf
+> package rules.vulnmap_003.tf
 # Evaluating the deny rule
 > deny
 [
@@ -175,7 +175,7 @@ $ ./policy-engine repl -d examples examples/main.tf
     }
   }
 ]
-# Evaluating parts of the policy. Both of these are defined in rules.khulnasoft_003.tf
+# Evaluating parts of the policy. Both of these are defined in rules.vulnmap_003.tf
 > has_bucket_name(buckets[0])
 true
 > 
@@ -187,11 +187,11 @@ Introspecting a single-resource policy:
 # Invoking the REPL with an IaC input
 $ ./policy-engine repl -d examples examples/main.tf
 # Switching to the package of a single-resource policy
-> package rules.khulnasoft_001.tf
-# Importing the khulnasoft library so that we can use khulnasoft.resources()
-> import data.khulnasoft
-# Evaluating khulnasoft.resources using the resource type defined in rules.khulnasoft_001.tf
-> khulnasoft.resources(resource_type)
+> package rules.vulnmap_001.tf
+# Importing the vulnmap library so that we can use vulnmap.resources()
+> import data.vulnmap
+# Evaluating vulnmap.resources using the resource type defined in rules.vulnmap_001.tf
+> vulnmap.resources(resource_type)
 [
   {
     ...
@@ -201,7 +201,7 @@ $ ./policy-engine repl -d examples examples/main.tf
   ...
 ]
 # Evaluating the deny rule with a specific resource
-> deny with input as khulnasoft.resources(resource_type)[0]
+> deny with input as vulnmap.resources(resource_type)[0]
 [
   {
     "message": "Bucket names should not contain the word bucket, it's implied"
@@ -222,7 +222,7 @@ test fixtures.
 $ ./policy-engine repl -d examples
 # Switching to the package of a test. In this case, we're using the same package name
 # for both the policy and the test in order to simplify the test code.
-> package rules.khulnasoft_003.tf
+> package rules.vulnmap_003.tf
 # Evaluating one of the tests
 > test_policy
 true
@@ -261,7 +261,7 @@ This is where the `snapshot_testing.match` builtin comes in.  In your
 ```open-policy-agent
 test_foo {
     some_variable = ...
-    khulnasoft.test.matches_snapshot(some_variable, "some/file/path.json")
+    vulnmap.test.matches_snapshot(some_variable, "some/file/path.json")
 }
 ```
 

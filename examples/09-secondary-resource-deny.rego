@@ -2,11 +2,11 @@
 # "This primary resource is vulnerable, because of this secondary resource"
 # This example demonstrates that concept by using the primary_resource attribute
 # in its deny rule.
-package rules.khulnasoft_009.tf
+package rules.vulnmap_009.tf
 
-import data.khulnasoft
+import data.vulnmap
 
-buckets := khulnasoft.resources("aws_s3_bucket")
+buckets := vulnmap.resources("aws_s3_bucket")
 
 # This function returns the paths to any SSE algorithm in this encryptiong
 # configuration that's not KMS.
@@ -22,7 +22,7 @@ bad_attrs(config) = ret {
 # config explain why."
 deny[info] {
 	bucket := buckets[_]
-	config := khulnasoft.relates(bucket, "aws_s3_bucket.server_side_encryption_configuration")[_]
+	config := vulnmap.relates(bucket, "aws_s3_bucket.server_side_encryption_configuration")[_]
 	bad := bad_attrs(config)
 	count(bad) > 0
 	info := {
@@ -40,7 +40,7 @@ deny[info] {
 # factored into that decision.
 resources[info] {
 	bucket := buckets[_]
-	config := khulnasoft.relates(bucket, "aws_s3_bucket.server_side_encryption_configuration")[_]
+	config := vulnmap.relates(bucket, "aws_s3_bucket.server_side_encryption_configuration")[_]
 	info := {
 		"primary_resource": bucket,
 		"resource": config,

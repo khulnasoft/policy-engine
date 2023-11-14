@@ -15,7 +15,7 @@
 package rules.EXAMPLE_01.terraform
 
 import data.lib.utils
-import data.khulnasoft
+import data.vulnmap
 
 input_type := "tf"
 
@@ -23,7 +23,7 @@ resource_type := "MULTIPLE"
 
 metadata := data.rules.EXAMPLE_01.metadata
 
-buckets := khulnasoft.resources("aws_s3_bucket")
+buckets := vulnmap.resources("aws_s3_bucket")
 
 deny[info] {
 	bucket := buckets[_]

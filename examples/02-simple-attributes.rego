@@ -14,7 +14,7 @@
 #     ]
 #
 # Then the `from_port` path would be `["ingress", 0, "from_port"]`.
-package rules.khulnasoft_002.tf
+package rules.vulnmap_002.tf
 
 resource_type = "aws_s3_bucket"
 

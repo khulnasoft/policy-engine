@@ -1,6 +1,6 @@
-package rules.khulnasoft_011.tf
+package rules.vulnmap_011.tf
 
-import data.khulnasoft
+import data.vulnmap
 
 metadata := {
   "id": "EXAMPLE-011",
@@ -9,12 +9,12 @@ metadata := {
   "category": "public_exposure",
 }
 
-pods := khulnasoft.resources("kubernetes_pod")
+pods := vulnmap.resources("kubernetes_pod")
 
 deny[info] {
   pod := pods[_]
-  service := khulnasoft.relates(pod, "kubernetes_pod.service")[_]
-  ingress := khulnasoft.relates(service, "kubernetes_service_v1.ingress")[_]
+  service := vulnmap.relates(pod, "kubernetes_pod.service")[_]
+  ingress := vulnmap.relates(service, "kubernetes_service_v1.ingress")[_]
 
   info := {
     "resource": pod,

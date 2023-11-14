@@ -12,11 +12,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-package khulnasoft
+package vulnmap
 
-import data.khulnasoft
-import data.khulnasoft.internal.relations
-import data.khulnasoft.internal.relations.cache
+import data.vulnmap
+import data.vulnmap.internal.relations
+import data.vulnmap.internal.relations.cache
 
 relates(resource, name) = ret {
 	ret := [right_resource |
@@ -44,12 +44,12 @@ relation_from_fields(name, left, right) = info {
 		"keys": {
 			"left": [[resource, resource[field]] |
 				fields := left[resource_type]
-				resource := khulnasoft.resources(resource_type)[_]
+				resource := vulnmap.resources(resource_type)[_]
 				field := fields[_]
 			],
 			"right": [[resource, resource[field]] |
 				fields := right[resource_type]
-				resource := khulnasoft.resources(resource_type)[_]
+				resource := vulnmap.resources(resource_type)[_]
 				field := fields[_]
 			],
 		},
