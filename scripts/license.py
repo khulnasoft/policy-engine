@@ -38,16 +38,16 @@ def license_file(path, comment_prefix):
         elif len(copyrights) > 0 and copyrights_end is None:
             copyrights_end = i
 
-    # Insert Khulnasoft copyright
-    khulnasoft = "Khulnasoft Limited All rights reserved."
+    # Insert Vulnmap copyright
+    vulnmap = "Khulnasoft Limited All rights reserved."
     year = str(datetime.datetime.today().year)
     changed = False
-    if khulnasoft in copyrights:
-        if copyrights[khulnasoft][1] != year:
-            copyrights[khulnasoft] = (copyrights[khulnasoft][0], year)
+    if vulnmap in copyrights:
+        if copyrights[vulnmap][1] != year:
+            copyrights[vulnmap] = (copyrights[vulnmap][0], year)
             changed = True
     else:
-        copyrights[khulnasoft] = (year, year)
+        copyrights[vulnmap] = (year, year)
         changed = True
 
     # Skip rewriting file

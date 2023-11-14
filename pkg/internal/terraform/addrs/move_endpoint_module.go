@@ -7,7 +7,7 @@ import (
 
 	"github.com/zclconf/go-cty/cty"
 
-	"github.com/khulnasoft/policy-engine/pkg/internal/terraform/tfdiags"
+	"github.com/hashicorp/terraform/internal/tfdiags"
 )
 
 // anyKeyImpl is the InstanceKey representation indicating a wildcard, which

@@ -7,9 +7,9 @@ import (
 
 	version "github.com/hashicorp/go-version"
 	"github.com/hashicorp/hcl/v2"
-	"github.com/khulnasoft/policy-engine/pkg/internal/terraform/addrs"
-	"github.com/khulnasoft/policy-engine/pkg/internal/terraform/depsfile"
-	"github.com/khulnasoft/policy-engine/pkg/internal/terraform/getproviders"
+	"github.com/hashicorp/terraform/internal/addrs"
+	"github.com/hashicorp/terraform/internal/depsfile"
+	"github.com/hashicorp/terraform/internal/getproviders"
 )
 
 // A Config is a node in the tree of modules within a configuration.

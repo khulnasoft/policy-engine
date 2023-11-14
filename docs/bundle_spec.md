@@ -53,8 +53,8 @@ Bundles can optionally contain a top-level data document in a file called `data.
 
 #### Restrictions
 
-Both the `lib/khulnasoft` directory and the `lib.khulnasoft` Rego package are reserved for Khulnasoft-provided
-libraries and may be overwritten by Khulnasoft tooling.
+Both the `lib/vulnmap` directory and the `lib.vulnmap` Rego package are reserved for Vulnmap-provided
+libraries and may be overwritten by Vulnmap tooling.
 
 ## Examples
 

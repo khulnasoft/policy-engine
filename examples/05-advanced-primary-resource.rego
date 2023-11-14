@@ -6,13 +6,13 @@
 #
 # We can do this by associating the auxiliary resource types using a
 # `primary_resource`.  You can see how this is used in `resources` below.
-package rules.khulnasoft_005.tf
+package rules.vulnmap_005.tf
 
-import data.khulnasoft
+import data.vulnmap
 
-buckets := khulnasoft.resources("aws_s3_bucket")
+buckets := vulnmap.resources("aws_s3_bucket")
 
-encryption_configs := khulnasoft.resources("aws_s3_bucket_server_side_encryption_configuration")
+encryption_configs := vulnmap.resources("aws_s3_bucket_server_side_encryption_configuration")
 
 # The `bucket` argument in encryption_configs can refer to a bucket ID, or the
 # name of the bucket.  This rule adds a map so we can get the canonical version.

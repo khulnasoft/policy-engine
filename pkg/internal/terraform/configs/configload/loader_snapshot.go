@@ -10,8 +10,8 @@ import (
 
 	version "github.com/hashicorp/go-version"
 	"github.com/hashicorp/hcl/v2"
-	"github.com/khulnasoft/policy-engine/pkg/internal/terraform/configs"
-	"github.com/khulnasoft/policy-engine/pkg/internal/terraform/modsdir"
+	"github.com/hashicorp/terraform/internal/configs"
+	"github.com/hashicorp/terraform/internal/modsdir"
 	"github.com/spf13/afero"
 )
 
@@ -323,10 +323,6 @@ func (fs snapshotFS) Name() string {
 
 func (fs snapshotFS) Chmod(name string, mode os.FileMode) error {
 	return fmt.Errorf("cannot set file mode inside configuration snapshot")
-}
-
-func (fs snapshotFS) Chown(string, int, int) error {
-	return fmt.Errorf("cannot set file owner inside configuration snapshot")
 }
 
 func (fs snapshotFS) Chtimes(name string, atime, mtime time.Time) error {

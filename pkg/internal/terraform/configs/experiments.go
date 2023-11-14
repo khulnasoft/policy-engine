@@ -4,15 +4,15 @@ import (
 	"fmt"
 
 	"github.com/hashicorp/hcl/v2"
-	"github.com/khulnasoft/policy-engine/pkg/internal/terraform/experiments"
-	"github.com/khulnasoft/policy-engine/pkg/internal/terraform/version"
+	"github.com/hashicorp/terraform/internal/experiments"
+	"github.com/hashicorp/terraform/version"
 )
 
 // When developing UI for experimental features, you can temporarily disable
 // the experiment warning by setting this package-level variable to a non-empty
 // value using a link-time flag:
 //
-// go install -ldflags="-X 'github.com/khulnasoft/policy-engine/pkg/internal/terraform/configs.disableExperimentWarnings=yes'"
+// go install -ldflags="-X 'github.com/hashicorp/terraform/internal/configs.disableExperimentWarnings=yes'"
 //
 // This functionality is for development purposes only and is not a feature we
 // are committing to supporting for end users.

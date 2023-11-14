@@ -6,7 +6,7 @@ import (
 
 	svchost "github.com/hashicorp/terraform-svchost"
 
-	"github.com/khulnasoft/policy-engine/pkg/internal/terraform/addrs"
+	"github.com/hashicorp/terraform/internal/addrs"
 )
 
 // ErrHostNoProviders is an error type used to indicate that a hostname given

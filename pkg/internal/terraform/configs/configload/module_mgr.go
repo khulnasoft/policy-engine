@@ -5,8 +5,8 @@ import (
 	"path/filepath"
 
 	"github.com/hashicorp/terraform-svchost/disco"
-	"github.com/khulnasoft/policy-engine/pkg/internal/terraform/modsdir"
-	"github.com/khulnasoft/policy-engine/pkg/internal/terraform/registry"
+	"github.com/hashicorp/terraform/internal/modsdir"
+	"github.com/hashicorp/terraform/internal/registry"
 	"github.com/spf13/afero"
 )
 

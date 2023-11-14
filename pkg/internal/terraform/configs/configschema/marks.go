@@ -3,7 +3,7 @@ package configschema
 import (
 	"fmt"
 
-	"github.com/khulnasoft/policy-engine/pkg/internal/terraform/lang/marks"
+	"github.com/hashicorp/terraform/internal/lang/marks"
 	"github.com/zclconf/go-cty/cty"
 )
 

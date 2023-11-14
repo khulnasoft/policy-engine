@@ -33,7 +33,7 @@ import (
 //go:embed regoapi
 var regoApi embed.FS
 
-// RegoAPIProvider is a provider for the embedded 'khulnasoft' and 'fugue' Rego APIs.
+// RegoAPIProvider is a provider for the embedded 'vulnmap' and 'fugue' Rego APIs.
 var RegoAPIProvider = data.FSProvider(regoApi, "regoapi")
 
 // ResourcesQuery describes a request for a specific resource type from the given scope.
@@ -103,8 +103,8 @@ func (l ResourcesResolver) Or(r ResourcesResolver) ResourcesResolver {
 const currentInputTypeName = "__current_input_type"
 const inputResourceTypesName = "__input_resource_types"
 const queryName = "__query"
-const khulnasoftRelationsCacheForward = "__khulnasoft_relations_cache_forward"
-const khulnasoftRelationsCacheBackward = "__khulnasoft_relations_cache_backward"
+const vulnmapRelationsCacheForward = "__vulnmap_relations_cache_forward"
+const vulnmapRelationsCacheBackward = "__vulnmap_relations_cache_backward"
 
 var builtinDeclarations = map[string]*types.Function{
 	currentInputTypeName: types.NewFunction(
@@ -133,14 +133,14 @@ var builtinDeclarations = map[string]*types.Function{
 			types.NewDynamicProperty(types.S, types.A),
 		)),
 	),
-	khulnasoftRelationsCacheForward: types.NewFunction(
+	vulnmapRelationsCacheForward: types.NewFunction(
 		types.Args(),
 		types.NewObject(
 			nil,
 			types.NewDynamicProperty(types.A, types.A),
 		),
 	),
-	khulnasoftRelationsCacheBackward: types.NewFunction(
+	vulnmapRelationsCacheBackward: types.NewFunction(
 		types.Args(),
 		types.NewObject(
 			nil,
@@ -276,9 +276,9 @@ type relationsCache struct {
 
 func (rc relationsCache) name() string {
 	if rc.forward {
-		return khulnasoftRelationsCacheForward
+		return vulnmapRelationsCacheForward
 	} else {
-		return khulnasoftRelationsCacheBackward
+		return vulnmapRelationsCacheBackward
 	}
 }
 

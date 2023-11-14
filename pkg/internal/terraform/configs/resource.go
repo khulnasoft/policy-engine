@@ -8,9 +8,9 @@ import (
 	"github.com/hashicorp/hcl/v2/hclsyntax"
 	hcljson "github.com/hashicorp/hcl/v2/json"
 
-	"github.com/khulnasoft/policy-engine/pkg/internal/terraform/addrs"
-	"github.com/khulnasoft/policy-engine/pkg/internal/terraform/lang"
-	"github.com/khulnasoft/policy-engine/pkg/internal/terraform/tfdiags"
+	"github.com/hashicorp/terraform/internal/addrs"
+	"github.com/hashicorp/terraform/internal/lang"
+	"github.com/hashicorp/terraform/internal/tfdiags"
 )
 
 // Resource represents a "resource" or "data" block in a module or file.

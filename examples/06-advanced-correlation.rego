@@ -3,18 +3,18 @@
 # and `deny`s using `correlation`.
 #
 # The code of this rule is mostly the same as the last one.
-package rules.khulnasoft_006.tf
+package rules.vulnmap_006.tf
 
-import data.khulnasoft
+import data.vulnmap
 
-buckets := khulnasoft.resources("aws_s3_bucket")
+buckets := vulnmap.resources("aws_s3_bucket")
 
 is_encrypted(bucket) {
 	_ = bucket.server_side_encryption_configuration[_].rule[_][_][_].sse_algorithm
 }
 
 is_encrypted(bucket) {
-	encryption_configs := khulnasoft.relates(bucket, "aws_s3_bucket.server_side_encryption_configuration")
+	encryption_configs := vulnmap.relates(bucket, "aws_s3_bucket.server_side_encryption_configuration")
 	_ := encryption_configs[_]
 }
 
@@ -46,7 +46,7 @@ resources[info] {
 # encryption configurations with the corresponding buckets.
 resources[info] {
 	bucket := buckets[_]
-	encryption_configs := khulnasoft.relates(bucket, "aws_s3_bucket.server_side_encryption_configuration")
+	encryption_configs := vulnmap.relates(bucket, "aws_s3_bucket.server_side_encryption_configuration")
 	ec = encryption_configs[_]
 	info := {
 		"correlation": bucket.id,

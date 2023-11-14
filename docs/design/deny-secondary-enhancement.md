@@ -160,7 +160,7 @@ Some advantages of this approach:
 
 ## Example rule
 
-This is a modified version of [KHULNASOFT-CC-00172](https://github.com/khulnasoft/opa-rules/blob/4602c181dba4db6a2e5678a4381f069fca2b882c/rego/rules/KHULNASOFT_CC_00172/terraform.rego).
+This is a modified version of [VULNMAP-CC-00172](https://github.com/khulnasoft/opa-rules/blob/4602c181dba4db6a2e5678a4381f069fca2b882c/rego/rules/VULNMAP_CC_00172/terraform.rego).
 
 
 Notice that we've removed the "existence checks" for all attributes, because
@@ -170,16 +170,16 @@ Notice that we've removed the "existence checks" for all attributes, because
 * `resources`: returns all resources and all attributes used by the policy
 
 ```open-policy-agent
-package rules.KHULNASOFT_CC_00172.terraform
+package rules.VULNMAP_CC_00172.terraform
 
 import data.lib.tf.aws.s3.bucket as s3lib
-import data.khulnasoft
+import data.vulnmap
 
-metadata := data.rules.KHULNASOFT_CC_00172.metadata
+metadata := data.rules.VULNMAP_CC_00172.metadata
 
-cloudtrails = khulnasoft.resources("aws_cloudtrail")
+cloudtrails = vulnmap.resources("aws_cloudtrail")
 
-buckets = khulnasoft.resources("aws_s3_bucket")
+buckets = vulnmap.resources("aws_s3_bucket")
 
 # First collect buckets IDs that are the target for cloudtrail logging.
 # Also store the corresponding trails.
@@ -254,10 +254,10 @@ resources[info] {
 ### Diff
 
 ```diff
-diff --git a/rego/rules/KHULNASOFT_CC_00172/terraform.rego b/rego/rules/KHULNASOFT_CC_00172/terraform.rego
+diff --git a/rego/rules/VULNMAP_CC_00172/terraform.rego b/rego/rules/VULNMAP_CC_00172/terraform.rego
 index a2dfe045..7b50e750 100644
---- a/rego/rules/KHULNASOFT_CC_00172/terraform.rego
-+++ b/rego/rules/KHULNASOFT_CC_00172/terraform.rego
+--- a/rego/rules/VULNMAP_CC_00172/terraform.rego
++++ b/rego/rules/VULNMAP_CC_00172/terraform.rego
 @@ -29,22 +29,23 @@ relevant_buckets := [bucket |
  # Set of "forbidden" ACLs.
  public_acls := {"public-read", "public-read-write"}

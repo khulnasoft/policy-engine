@@ -6,7 +6,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/hcl/v2"
-	"github.com/khulnasoft/policy-engine/pkg/internal/terraform/addrs"
+	"github.com/hashicorp/terraform/internal/addrs"
 )
 
 // validateProviderConfigs walks the full configuration tree from the root

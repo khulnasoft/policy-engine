@@ -27,7 +27,7 @@ func TestApplyCustomSeverities(t *testing.T) {
 	in := models.Results{Results: []models.Result{{
 		RuleResults: []models.RuleResults{
 			{
-				Id: "KHULNASOFT-ABC-01",
+				Id: "VULNMAP-ABC-01",
 				Results: []models.RuleResult{
 					{
 						Passed:            false,
@@ -39,7 +39,7 @@ func TestApplyCustomSeverities(t *testing.T) {
 				},
 			},
 			{
-				Id: "KHULNASOFT-ABC-02",
+				Id: "VULNMAP-ABC-02",
 				Results: []models.RuleResult{
 					{
 						Passed:            false,
@@ -51,7 +51,7 @@ func TestApplyCustomSeverities(t *testing.T) {
 				},
 			},
 			{
-				Id: "KHULNASOFT-ABC-03",
+				Id: "VULNMAP-ABC-03",
 				Results: []models.RuleResult{
 					{
 						Passed:            false,
@@ -65,13 +65,13 @@ func TestApplyCustomSeverities(t *testing.T) {
 		},
 	}}}
 	customSeverities := CustomSeverities{
-		"KHULNASOFT-ABC-01": "None",
-		"KHULNASOFT-ABC-02": "Low",
+		"VULNMAP-ABC-01": "None",
+		"VULNMAP-ABC-02": "Low",
 	}
 	expected := models.Results{Results: []models.Result{{
 		RuleResults: []models.RuleResults{
 			{
-				Id: "KHULNASOFT-ABC-02",
+				Id: "VULNMAP-ABC-02",
 				Results: []models.RuleResult{
 					{
 						Passed:            false,
@@ -83,7 +83,7 @@ func TestApplyCustomSeverities(t *testing.T) {
 				},
 			},
 			{
-				Id: "KHULNASOFT-ABC-03",
+				Id: "VULNMAP-ABC-03",
 				Results: []models.RuleResult{
 					{
 						Passed:            false,

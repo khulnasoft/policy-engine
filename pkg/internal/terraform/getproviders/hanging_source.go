@@ -3,7 +3,7 @@ package getproviders
 import (
 	"context"
 
-	"github.com/khulnasoft/policy-engine/pkg/internal/terraform/addrs"
+	"github.com/hashicorp/terraform/internal/addrs"
 )
 
 // HangingSource is an implementation of Source which hangs until the given

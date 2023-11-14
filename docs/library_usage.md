@@ -257,8 +257,8 @@ inline documentation.
 | `UnableToReadDir`            |
 ## Custom resource resolution
 
-The library's caller can customize the behavior of the [`khulnasoft.query`
-builtin](policy_spec.md#khulnasoftqueryquery) using Golang functions injected into
+The library's caller can customize the behavior of the [`vulnmap.query`
+builtin](policy_spec.md#vulnmapqueryquery) using Golang functions injected into
 EngineOptions. The main use case of this is to fetch resources from places other
 than the input.
 
@@ -305,7 +305,7 @@ Policies that make use of the "region" input scope field, which will not be set
 by IaC-specific config loaders, such as:
 
 ```
-resources := khulnasoft.query({
+resources := vulnmap.query({
   "resource_type": "aws_cloudtrail",
   "scope": {
     "region": "us-east-1",
@@ -471,11 +471,11 @@ func main() {
 		// of the reader implementations included in this library.
 		BundleReaders: readers,
 		// This is an optional instance of the logger.Logger interface. This interface is
-		// compatible with the one provided by the khulnasoft/go-common library. The logger
+		// compatible with the one provided by the vulnmap/go-common library. The logger
 		// package also contains an implementation of this interface.
 		Logger:		logger,
 		// This is an optional instance of the metrics.Metrics interface. This interface is
-		// compatible with the one provided by the khulnasoft/go-common library. The metrics
+		// compatible with the one provided by the vulnmap/go-common library. The metrics
 		// package also contains an implementation of this interface.
 		Metrics:	 m,
 	})
@@ -613,7 +613,7 @@ var results *models.Results
 // Code to produce the results
 // ...
 postprocess.ApplyCustomSeverities(results, postprocess.CustomSeverities{
-	"KHULNASOFT-CC-00097": "Low",
-	"KHULNASOFT-CC-TF-10": "None",
+	"VULNMAP-CC-00097": "Low",
+	"VULNMAP-CC-TF-10": "None",
 })
 ```

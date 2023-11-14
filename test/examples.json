@@ -681,7 +681,7 @@
               ]
             }
           ],
-          "package": "data.rules.khulnasoft_001.tf"
+          "package": "data.rules.vulnmap_001.tf"
         },
         {
           "kind": "vulnerability",
@@ -827,7 +827,7 @@
               ]
             }
           ],
-          "package": "data.rules.khulnasoft_002.tf"
+          "package": "data.rules.vulnmap_002.tf"
         },
         {
           "kind": "vulnerability",
@@ -907,7 +907,7 @@
               ]
             }
           ],
-          "package": "data.rules.khulnasoft_003.tf"
+          "package": "data.rules.vulnmap_003.tf"
         },
         {
           "kind": "vulnerability",
@@ -1073,7 +1073,7 @@
               ]
             }
           ],
-          "package": "data.rules.khulnasoft_004.tf"
+          "package": "data.rules.vulnmap_004.tf"
         },
         {
           "kind": "vulnerability",
@@ -1313,7 +1313,7 @@
               ]
             }
           ],
-          "package": "data.rules.khulnasoft_005.tf"
+          "package": "data.rules.vulnmap_005.tf"
         },
         {
           "kind": "vulnerability",
@@ -1489,7 +1489,7 @@
               ]
             }
           ],
-          "package": "data.rules.khulnasoft_005b.tf"
+          "package": "data.rules.vulnmap_005b.tf"
         },
         {
           "kind": "vulnerability",
@@ -1664,7 +1664,7 @@
               ]
             }
           ],
-          "package": "data.rules.khulnasoft_006.tf"
+          "package": "data.rules.vulnmap_006.tf"
         },
         {
           "kind": "vulnerability",
@@ -1732,7 +1732,7 @@
               ]
             }
           ],
-          "package": "data.rules.khulnasoft_007.tf"
+          "package": "data.rules.vulnmap_007.tf"
         },
         {
           "kind": "vulnerability",
@@ -1782,7 +1782,7 @@
               ]
             }
           ],
-          "package": "data.rules.khulnasoft_008.tf"
+          "package": "data.rules.vulnmap_008.tf"
         },
         {
           "kind": "vulnerability",
@@ -1890,7 +1890,7 @@
               ]
             }
           ],
-          "package": "data.rules.khulnasoft_009.tf"
+          "package": "data.rules.vulnmap_009.tf"
         },
         {
           "kind": "vulnerability",
@@ -2038,7 +2038,7 @@
               ]
             }
           ],
-          "package": "data.rules.khulnasoft_010.tf"
+          "package": "data.rules.vulnmap_010.tf"
         },
         {
           "id": "EXAMPLE-011",
@@ -2104,7 +2104,7 @@
               ]
             }
           ],
-          "package": "data.rules.khulnasoft_011.tf"
+          "package": "data.rules.vulnmap_011.tf"
         }
       ]
     }

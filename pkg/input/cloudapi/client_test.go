@@ -1,4 +1,4 @@
-// © 2023 Khulnasoft Limited All rights reserved.
+// © 2023 Snyk Limited All rights reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -41,31 +41,31 @@ func TestClient(t *testing.T) {
 		{
 			name: "all options",
 			config: ClientConfig{
-				URL:     "https://api.dev.khulnasoft.io",
+				URL:     "https://api.dev.snyk.io",
 				Token:   "some-token",
 				Version: "2022-12-21~beta",
 			},
-			expectedURL:           "https://api.dev.khulnasoft.io",
+			expectedURL:           "https://api.dev.snyk.io",
 			expectedAuthorization: "some-token",
 			expectedVersion:       "2022-12-21~beta",
 		},
 		{
 			name: "missing scheme in URL",
 			config: ClientConfig{
-				URL:   "api.dev.khulnasoft.io",
+				URL:   "api.dev.snyk.io",
 				Token: "some-token",
 			},
-			expectedURL:           "https://api.dev.khulnasoft.io",
+			expectedURL:           "https://api.dev.snyk.io",
 			expectedAuthorization: "some-token",
 			expectedVersion:       defaultVersion,
 		},
 		{
 			name: "URL with path",
 			config: ClientConfig{
-				URL:   "https://api.dev.khulnasoft.io/api/v1",
+				URL:   "https://api.dev.snyk.io/api/v1",
 				Token: "some-token",
 			},
-			expectedURL:           "https://api.dev.khulnasoft.io/api/v1",
+			expectedURL:           "https://api.dev.snyk.io/api/v1",
 			expectedAuthorization: "some-token",
 			expectedVersion:       defaultVersion,
 		},
@@ -77,7 +77,7 @@ func TestClient(t *testing.T) {
 		{
 			name: "invalid URL",
 			config: ClientConfig{
-				URL:   "\x7f://api.dev.khulnasoft.io",
+				URL:   "\x7f://api.dev.snyk.io",
 				Token: "some-token",
 			},
 			expectedError: ErrInvalidURL,

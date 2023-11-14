@@ -3,7 +3,7 @@ package configs
 import (
 	"github.com/hashicorp/hcl/v2"
 	"github.com/hashicorp/hcl/v2/hcldec"
-	"github.com/khulnasoft/policy-engine/pkg/internal/terraform/configs/configschema"
+	"github.com/hashicorp/terraform/internal/configs/configschema"
 	"github.com/zclconf/go-cty/cty"
 )
 
