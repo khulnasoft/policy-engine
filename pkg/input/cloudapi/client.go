@@ -24,7 +24,7 @@ import (
 )
 
 const (
-	defaultURL     = "https://api.khulnasoft.io"
+	defaultURL     = "https://api.vulnmap.khulnasoft.com"
 	defaultVersion = "2022-04-13~experimental"
 )
 
@@ -105,8 +105,8 @@ func NewClient(config ClientConfig) (*Client, error) {
 
 func NewClientFromEnv() (*Client, error) {
 	return NewClient(ClientConfig{
-		URL:     os.Getenv("KHULNASOFT_API"),
-		Token:   os.Getenv("KHULNASOFT_TOKEN"),
-		Version: os.Getenv("KHULNASOFT_API_VERSION"),
+		URL:     os.Getenv("VULNMAP_API"),
+		Token:   os.Getenv("VULNMAP_TOKEN"),
+		Version: os.Getenv("VULNMAP_API_VERSION"),
 	})
 }

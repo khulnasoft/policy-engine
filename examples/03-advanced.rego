@@ -1,17 +1,17 @@
 # Advanced rules are rules that can inspect multiple resources at once.
-package rules.khulnasoft_003.tf
+package rules.vulnmap_003.tf
 
-import data.khulnasoft
+import data.vulnmap
 
 # `resource_type` can be omitted.  If it is present, it must be set to
 # `MULTIPLE` for advanced rules.
 # resource_type = "MULTIPLE"
 
 # Advanced rules can list resources of a specific type using
-# `khulnasoft.resources(resource_type)`.
+# `vulnmap.resources(resource_type)`.
 #
 # This function returns an array of resources of the requested type.
-buckets = khulnasoft.resources("aws_s3_bucket")
+buckets = vulnmap.resources("aws_s3_bucket")
 
 has_bucket_name(bucket) {
 	is_string(bucket.bucket)

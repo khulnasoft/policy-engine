@@ -1,4 +1,4 @@
-# © 2023 Khulnasoft Limited All rights reserved.
+# © 2022-2023 Khulnasoft Limited All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,12 +12,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-package khulnasoft.internal.relations.cache
+package vulnmap
 
-# This is a dummy pure Rego cache that just assigns the values.  When using
-# policy-engine run, we use <pkg/policy/regoapi/khulnasoft_relations_cache.rego>
-# instead.
+resources(resource_type) = ret {
+	ret := __query({"resource_type": resource_type, "scope": {}})
+}
 
-forward := data.khulnasoft.internal.relations.forward
+input_type := __current_input_type()
 
-backward := data.khulnasoft.internal.relations.backward
+input_resource_types := __input_resource_types()
+
+query(scope) = ret {
+	ret := __query(scope)
+}

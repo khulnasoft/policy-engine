@@ -3,11 +3,11 @@
 #
 #     rules.RULE_ID.INPUT_TYPE
 #
-package rules.khulnasoft_001.tf
+package rules.vulnmap_001.tf
 
 # Rules can set metadata in the `metadata` assignment.  This is typically
 # imported from a JSON file, like here:
-metadata = data.rules.khulnasoft_001.metadata
+metadata = data.rules.vulnmap_001.metadata
 
 # Simple rules must assign `resource_type`.  All resources of this type will
 # be subject to this rule.

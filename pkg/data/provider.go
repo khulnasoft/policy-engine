@@ -126,7 +126,7 @@ func TarGzProvider(reader io.Reader) Provider {
 // in production.
 func PureRegoBuiltinsProvider() Provider {
 	return func(ctx context.Context, consumer Consumer) error {
-		for path, rego := range embed.KhulnasoftBuiltins {
+		for path, rego := range embed.VulnmapBuiltins {
 			if err := regoParser(ctx, "", path, bytes.NewReader(rego), consumer); err != nil {
 				return err
 			}
@@ -138,7 +138,7 @@ func PureRegoBuiltinsProvider() Provider {
 // Provides the pure rego part of the API.
 func PureRegoLibProvider() Provider {
 	return func(ctx context.Context, consumer Consumer) error {
-		for path, rego := range embed.KhulnasoftLib {
+		for path, rego := range embed.VulnmapLib {
 			if err := regoParser(ctx, "", path, bytes.NewReader(rego), consumer); err != nil {
 				return err
 			}

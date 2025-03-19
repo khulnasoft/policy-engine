@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-package khulnasoft.internal.relations
+package vulnmap.internal.relations
 
 make_resource_key(resource) = ret {
 	ret := [resource._namespace, resource._type, resource._id]

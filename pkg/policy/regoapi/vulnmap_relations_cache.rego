@@ -12,14 +12,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-package khulnasoft.internal.relations.cache
+package vulnmap.internal.relations.cache
 
 # This calls the builtins to have very fine-grained control about when we
 # evaluate relations (exactly once for each input).
 #
 # When using the pure Rego implementations (e.g. for repl or test),
-# <rego/khulnasoft/internal/relations_cache.rego> is used instead.
+# <rego/vulnmap/internal/relations_cache.rego> is used instead.
 
-forward := __khulnasoft_relations_cache_forward()
+forward := __vulnmap_relations_cache_forward()
 
-backward := __khulnasoft_relations_cache_backward()
+backward := __vulnmap_relations_cache_backward()

@@ -15,7 +15,7 @@ require (
 	github.com/google/uuid v1.3.0
 	github.com/hashicorp/errwrap v1.1.0
 	github.com/hashicorp/go-cleanhttp v0.5.2
-	github.com/hashicorp/go-getter v1.7.0
+	github.com/hashicorp/go-getter v1.7.3
 	github.com/hashicorp/go-hclog v1.2.0
 	github.com/hashicorp/go-multierror v1.1.1
 	github.com/hashicorp/go-retryablehttp v0.7.1
@@ -102,5 +102,5 @@ require (
 )
 
 // Fixes:
-// KHULNASOFT-GOLANG-GOLANGORGXNETHTTP2H2C-3230894
-replace golang.org/x/net => golang.org/x/net v0.7.0
+// VULNMAP-GOLANG-GOLANGORGXNETHTTP2H2C-3230894
+// replace golang.org/x/net => golang.org/x/net v0.7.0

@@ -5,23 +5,23 @@
 # _resource relationships.  You can read about the design in detail in
 # <../docs/design/resource-relations.md>, this example will just cover the
 # actual usage.
-package rules.khulnasoft_005b.tf
+package rules.vulnmap_005b.tf
 
-import data.khulnasoft
+import data.vulnmap
 
-buckets := khulnasoft.resources("aws_s3_bucket")
+buckets := vulnmap.resources("aws_s3_bucket")
 
 # Note that we don't actually need this except to illustrate back_relates
 # further below.  Exercise for the reader: replace `back_relates` by `relates`
 # in `resources[info]` rule without affecting the result.
-encryption_configs := khulnasoft.resources("aws_s3_bucket_server_side_encryption_configuration")
+encryption_configs := vulnmap.resources("aws_s3_bucket_server_side_encryption_configuration")
 
 is_encrypted(bucket) {
 	_ = bucket.server_side_encryption_configuration[_].rule[_][_][_].sse_algorithm
 }
 
 is_encrypted(bucket) {
-	# `khulnasoft.relates` can be used to query for a list of relating resources
+	# `vulnmap.relates` can be used to query for a list of relating resources
 	# based on a relationship name.  In this case, the relationship name is
 	# the same as the resource type of the related resource, but that's not
 	# always the case.
@@ -29,7 +29,7 @@ is_encrypted(bucket) {
 	# Relationships are declared in separate files, so they can be shared by
 	# rules.  In <relations.rego>, you can see how this relationship is defined
 	# in Rego.
-	encryption_configs := khulnasoft.relates(bucket, "aws_s3_bucket.server_side_encryption_configuration")
+	encryption_configs := vulnmap.relates(bucket, "aws_s3_bucket.server_side_encryption_configuration")
 	_ := encryption_configs[_]
 }
 
@@ -47,14 +47,14 @@ resources[info] {
 	info := {"resource": bucket}
 }
 
-# In addition to `khulnasoft.relates`, you can use `back_relates` to reverse any
+# In addition to `vulnmap.relates`, you can use `back_relates` to reverse any
 # relationship.  This can be useful in certain rules, in places where you
 # you already have the secondary resource defined, and want to retrieve the
 # primary one.  Notes that this also returns a list, as relations are always
 # many-to-many.
 resources[info] {
 	ec := encryption_configs[_]
-	bucket := khulnasoft.back_relates("aws_s3_bucket.server_side_encryption_configuration", ec)[_]
+	bucket := vulnmap.back_relates("aws_s3_bucket.server_side_encryption_configuration", ec)[_]
 	info := {
 		"primary_resource": bucket,
 		"resource": ec,

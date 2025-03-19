@@ -28,7 +28,7 @@ import (
 	"github.com/khulnasoft/policy-engine/pkg/rego"
 )
 
-// This file contains code for backwards compatibility with legacy Khulnasoft IaC rules
+// This file contains code for backwards compatibility with legacy Vulnmap IaC rules
 
 type LegacyIaCPolicy struct {
 	*BasePolicy

@@ -5,7 +5,7 @@ output of the `deny` and `resources` rules, which can be quite large or complex,
 hand. Any time we make updates, for example to reword the message returned by a rule, we
 need to make the same update repeatedly in the expected output in our tests.
 
-This document is a proposal for a new `khulnasoft.test.matches_snapshot` builtin which can
+This document is a proposal for a new `vulnmap.test.matches_snapshot` builtin which can
 alleviate some of that burden.
 
 ## Background on snapshot testing
@@ -32,7 +32,7 @@ Similar to the Jest implementation, our snapshot tests should just be another as
 that you can make alongside your other tests:
 
 ```open-policy-agent
-khulnasoft.test.matches_snapshot(some_variable, "some/file/path.json")
+vulnmap.test.matches_snapshot(some_variable, "some/file/path.json")
 ```
 
 * This function will assert that the value of `some_variable` matches the contents of
@@ -48,7 +48,7 @@ khulnasoft.test.matches_snapshot(some_variable, "some/file/path.json")
 
 ## Example
 
-This is an existing test from `KHULNASOFT-CC-00107`:
+This is an existing test from `VULNMAP-CC-00107`:
 
 ```open-policy-agent
 check_invalid_via_multiple(mock_input) {
@@ -162,10 +162,10 @@ And rewritten using the proposed function:
 ```open-policy-agent
 check_invalid_via_multiple(mock_input) {
         denies := rule_tests.by_correlation_id(deny) with input as mock_input
-        khulnasoft.test.matches_snapshot(denies, "snapshots/invalid_via_multiple_denies.json")
+        vulnmap.test.matches_snapshot(denies, "snapshots/invalid_via_multiple_denies.json")
 
         rs := rule_tests.by_correlation_id(resources) with input as mock_input
-        khulnasoft.test.matches_snapshot(rs, "snapshots/invalid_via_multiple_rs.json")
+        vulnmap.test.matches_snapshot(rs, "snapshots/invalid_via_multiple_rs.json")
 }
 
 test_invalid_via_multiple {

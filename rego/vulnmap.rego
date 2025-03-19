@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-package khulnasoft
+package vulnmap
 
 __physical_or_logical_id(resource) = ret {
 	is_string(resource.attributes.id)
