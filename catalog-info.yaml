@@ -4,7 +4,7 @@ metadata:
   name: policy-engine
   annotations:
     github.com/project-slug: khulnasoft/policy-engine
-    github.com/team-slug: vulnmap/cloud-engines
+    github.com/team-slug: khulnasoft/iac
 spec:
   type: external-library
   lifecycle: "-"
