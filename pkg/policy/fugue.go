@@ -44,6 +44,10 @@ func (b *fugueAllowBooleanProcessor) Process(val ast.Value) error {
 	return rego.Bind(val, &b.allow)
 }
 
+func (b *fugueAllowBooleanProcessor) ProcessResource(val ast.Value) error {
+ 	return nil
+}
+
 func (b *fugueAllowBooleanProcessor) Results() []models.RuleResult {
 	return []models.RuleResult{
 		{
@@ -72,6 +76,10 @@ func NewFugueDenyBooleanProcessor(
 		severity: metadata.Severity,
 	}
 }
+
+func (b *fugueDenyBooleanProcessor) ProcessResource(val ast.Value) error {
+ 	return nil
+ }
 
 func (b *fugueDenyBooleanProcessor) Process(val ast.Value) error {
 	return rego.Bind(val, &b.deny)
@@ -122,6 +130,10 @@ func (p *fuguePolicyProcessor) ProcessResource(val ast.Value) error {
 
 func (p *fuguePolicyProcessor) Results() []models.RuleResult {
 	return p.results
+}
+
+func (p *fugueAllowInfoProcessor) ProcessResource(val ast.Value) error {
+ 	return nil
 }
 
 // This is a ProcessSingleResultSet func for the old allow[info] and
