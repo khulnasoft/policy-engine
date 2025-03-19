@@ -180,7 +180,7 @@ components:
         id:
           type: string
           description: |
-            The Rule ID, e.g. KHULNASOFT_00503 or 608f97c3-a11a-4154-a88e-a2fcd18c75b0
+            The Rule ID, e.g. VULNMAP_00503 or 608f97c3-a11a-4154-a88e-a2fcd18c75b0
         kind:
           type: string
           description: The kind of result that this rule produces, e.g "vulnerability"

@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-package khulnasoft.terraform
+package vulnmap.terraform
 
 test_resource_provider_version_constraint {
 	resource_provider_version_constraint({}, ">=3")

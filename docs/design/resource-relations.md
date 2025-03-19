@@ -89,12 +89,12 @@ left blank:
 
     (my_cloudtrail, "logs_to_bucket", ?)
 
-In Rego, this is implemented by the `khulnasoft.relates("relation_name", resource)`
+In Rego, this is implemented by the `vulnmap.relates("relation_name", resource)`
 function:
 
 ```rego
-cloudtrail := khulnasoft.resources("aws_cloudtrail")[_]
-bucket := khulnasoft.relates(cloudtrail, "logs_to_bucket")[_]
+cloudtrail := vulnmap.resources("aws_cloudtrail")[_]
+bucket := vulnmap.relates(cloudtrail, "logs_to_bucket")[_]
 ```
 
 By virtue of having a common model and having this implemented in a library, we
@@ -104,8 +104,8 @@ author can use `back_relates` to look for the corresponding triple
 `(?, "logs_to_bucket", bucket)`:
 
 ```rego
-bucket := khulnasoft.resources("aws_s3_bucket")[_]
-cloudtrail := khulnasoft.back_relates("logs_to_bucket", bucket)[_]
+bucket := vulnmap.resources("aws_s3_bucket")[_]
+cloudtrail := vulnmap.back_relates("logs_to_bucket", bucket)[_]
 ```
 
 Note the reverse order of the arguments which feels more natural to the author
@@ -131,15 +131,15 @@ This is an example of what that looks like:
 ```rego
 package relations
 
-import data.khulnasoft
+import data.vulnmap
 
 relations[info] {
 	info := {
 		"name": "logging",
 		"keys": {
-			"right": [[logging, logging.bucket] | logging := khulnasoft.resources("aws_s3_bucket_logging")[_]],
+			"right": [[logging, logging.bucket] | logging := vulnmap.resources("aws_s3_bucket_logging")[_]],
 			"left": [[bucket, k] |
-				bucket := khulnasoft.resources("bucket")[_]
+				bucket := vulnmap.resources("bucket")[_]
 				attr := {"id", "bucket"}[_]
 				k := bucket[attr]
 			],
@@ -160,10 +160,10 @@ However, the package name is fixed, so the policy engine knows where to find
 them.
 
 ```rego
-import data.khulnasoft
+import data.vulnmap
 ```
 
-We still use the `khulnasoft.resources` (or `query`) to obtain the resources we want
+We still use the `vulnmap.resources` (or `query`) to obtain the resources we want
 to relate.
 
 ```rego
@@ -184,10 +184,10 @@ See also [naming relationships](#naming-relationships)
 ```rego
 		"keys": {
 			"right": [[logging, logging.bucket] |
-				logging := khulnasoft.resources("aws_s3_bucket_logging")[_]
+				logging := vulnmap.resources("aws_s3_bucket_logging")[_]
 			],
 			"left": [[bucket, k] |
-				bucket := khulnasoft.resources("bucket")[_]
+				bucket := vulnmap.resources("bucket")[_]
 				attr := {"id", "bucket"}[_]
 				k := bucket[attr]
 			],
@@ -216,8 +216,8 @@ the user gives an "explicit" list of pairs of resources to be joined).
 
 ```rego
 "explicit": [[bucket, logging] |
-	bucket := khulnasoft.resources("aws_s3_bucket")[_]
-	logging := khulnasoft.resources("aws_s3_bucket_logging")[_]
+	bucket := vulnmap.resources("aws_s3_bucket")[_]
+	logging := vulnmap.resources("aws_s3_bucket_logging")[_]
 	bucket.id == logging.bucket
 ],
 ```
@@ -279,7 +279,7 @@ rules for these types of relationships:
 # property is equal to a right property, we'll consider those resources to be
 # related.
 relations[info] {
-	info := khulnasoft.relation_from_fields(
+	info := vulnmap.relation_from_fields(
 		"<relation name>",
 		{"<left resource>": ["<left property 1>", "<left property 2>"]},
 		{"<right resource>": ["<right property 1>", "<right property 2>"]},
@@ -292,7 +292,7 @@ like so:
 
 ```open-policy-agent
 relations[info] {
-	info := khulnasoft.relation_from_fields(
+	info := vulnmap.relation_from_fields(
 		"aws_s3_bucket.logging",
 		{"aws_s3_bucket": ["id", "bucket"]},
 		{"aws_s3_bucket_logging": ["bucket"]},
@@ -399,12 +399,12 @@ relations[info] {
 		"name": "forward_to",
 		"keys": {
 			"left": [[r, forward.forward_to, ann] |
-				r := khulnasoft.resources("load_balancer")[_]
+				r := vulnmap.resources("load_balancer")[_]
 				forward := r.forward_to[_]
 				ann := {"port": forward.port}
 			],
 			"right": [[r, r.id] |
-				r := khulnasoft.resources("application")[_]
+				r := vulnmap.resources("application")[_]
 			],
 		},
 	}
@@ -419,8 +419,8 @@ element in each entry:
 
 ```rego
 "explicit": [[bucket, logging, annotation] |
-	bucket := khulnasoft.resources("aws_s3_bucket")[_]
-	logging := khulnasoft.resources("aws_s3_bucket_logging")[_]
+	bucket := vulnmap.resources("aws_s3_bucket")[_]
+	logging := vulnmap.resources("aws_s3_bucket_logging")[_]
 	bucket.id == logging.bucket
 	annotation := ...
 ],
@@ -429,19 +429,19 @@ element in each entry:
 ### Querying relations
 
 Once the relation is defined, it still can be queried using the regular
-`khulnasoft.relates` and `khulnasoft.back_relates`, which do not return the annotations:
+`vulnmap.relates` and `vulnmap.back_relates`, which do not return the annotations:
 
 ```rego
-lb := khulnasoft.resources("load_balancer")[_]
-app := khulnasoft.relates(lb, "forward_to")[_]
+lb := vulnmap.resources("load_balancer")[_]
+app := vulnmap.relates(lb, "forward_to")[_]
 ```
 
-If the annotations are desired, instead use `khulnasoft.relates_with` and
-`khulnasoft.back_relates_with` instead, which each return the annotations in addition
+If the annotations are desired, instead use `vulnmap.relates_with` and
+`vulnmap.back_relates_with` instead, which each return the annotations in addition
 to the resources:
 
 ```rego
-lb := khulnasoft.resources("load_balancer")[_]
-[app, ann] := khulnasoft.relates_with(lb, "forward_to")[_]
+lb := vulnmap.resources("load_balancer")[_]
+[app, ann] := vulnmap.relates_with(lb, "forward_to")[_]
 ann.port == 80
 ```

@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-package khulnasoft.terraform
+package vulnmap.terraform
 
 # Checks if the provider used for the resource is compatible with the given
 # constraint.

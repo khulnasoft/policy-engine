@@ -1,17 +1,17 @@
 # This rule uses a relationship that was defined using the
-# khulnasoft.relation_from_fields helper function. See <relations.rego> for the
+# vulnmap.relation_from_fields helper function. See <relations.rego> for the
 # definition of the "aws_s3_bucket.ownership_controls" relation that we use
 # below.
-package rules.khulnasoft_010.tf
+package rules.vulnmap_010.tf
 
-import data.khulnasoft
+import data.vulnmap
 
-buckets := khulnasoft.resources("aws_s3_bucket")
+buckets := vulnmap.resources("aws_s3_bucket")
 
 # This deny rule captures buckets that have no ownership controls defined.
 deny[info] {
   bucket := buckets[_]
-  controls := khulnasoft.relates(bucket, "aws_s3_bucket.ownership_controls")
+  controls := vulnmap.relates(bucket, "aws_s3_bucket.ownership_controls")
   count(controls) < 1
   info := {
     "resource": bucket,
@@ -21,7 +21,7 @@ deny[info] {
 # This deny rule captures buckets that have misconfigured ownership controls
 deny[info] {
   bucket := buckets[_]
-  controls := khulnasoft.relates(bucket, "aws_s3_bucket.ownership_controls")
+  controls := vulnmap.relates(bucket, "aws_s3_bucket.ownership_controls")
   control := controls[_]
   control.rule[_].object_ownership != "BucketOwnerEnforced"
   info := {
@@ -39,7 +39,7 @@ resources[info] {
 
 resources[info] {
   bucket := buckets[_]
-  control := khulnasoft.relates(bucket, "aws_s3_bucket.ownership_controls")[_]
+  control := vulnmap.relates(bucket, "aws_s3_bucket.ownership_controls")[_]
   info := {
     "primary_resource": bucket,
     "resource": control,

@@ -358,7 +358,7 @@ func (s *policySet) precomputeRelationsCache(
 	err := s.query(
 		ctx,
 		&QueryOptions{
-			Query:          "data.khulnasoft.internal.relations.forward",
+			Query:          "data.vulnmap.internal.relations.forward",
 			Input:          input,
 			ResourcesQuery: resourcesQuery,
 			ResultProcessor: func(val ast.Value) error {
@@ -379,7 +379,7 @@ func (s *policySet) precomputeRelationsCache(
 	err = s.query(
 		ctx,
 		&QueryOptions{
-			Query:          "data.khulnasoft.internal.relations.backward",
+			Query:          "data.vulnmap.internal.relations.backward",
 			Input:          input,
 			ResourcesQuery: resourcesQuery,
 			ResultProcessor: func(val ast.Value) error {
@@ -453,7 +453,7 @@ func (s *policySet) query(ctx context.Context, options *QueryOptions) error {
 		Query:    options.Query,
 		Builtins: builtins.Implementations(),
 		// TODO: remove once we're no longer looking at input.resources in
-		// Khulnasoft rules
+		// Vulnmap rules
 		Input: ast.NewObject(
 			[2]*ast.Term{ast.StringTerm("resources"), ast.ObjectTerm()},
 		),

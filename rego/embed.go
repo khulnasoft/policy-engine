@@ -18,28 +18,28 @@ import (
 	_ "embed"
 )
 
-//go:embed khulnasoft.rego
-var khulnasoftRego []byte
+//go:embed vulnmap.rego
+var vulnmapRego []byte
 
-//go:embed khulnasoft/internal/relations_cache.rego
-var khulnasoftRelationsCache []byte
+//go:embed vulnmap/internal/relations_cache.rego
+var vulnmapRelationsCache []byte
 
-//go:embed khulnasoft/terraform.rego
-var khulnasoftTerraformRego []byte
+//go:embed vulnmap/terraform.rego
+var vulnmapTerraformRego []byte
 
-//go:embed khulnasoft/relations.rego
-var khulnasoftRelationsRego []byte
+//go:embed vulnmap/relations.rego
+var vulnmapRelationsRego []byte
 
-//go:embed khulnasoft/internal/relations.rego
-var khulnasoftInternalRelationsRego []byte
+//go:embed vulnmap/internal/relations.rego
+var vulnmapInternalRelationsRego []byte
 
-var KhulnasoftBuiltins map[string][]byte = map[string][]byte{
-	"khulnasoft.rego":                          khulnasoftRego,
-	"khulnasoft/internal/relations_cache.rego": khulnasoftRelationsCache,
+var VulnmapBuiltins map[string][]byte = map[string][]byte{
+	"vulnmap.rego":                          vulnmapRego,
+	"vulnmap/internal/relations_cache.rego": vulnmapRelationsCache,
 }
 
-var KhulnasoftLib map[string][]byte = map[string][]byte{
-	"khulnasoft/terraform.rego":          khulnasoftTerraformRego,
-	"khulnasoft/relations.rego":          khulnasoftRelationsRego,
-	"khulnasoft/internal/relations.rego": khulnasoftInternalRelationsRego,
+var VulnmapLib map[string][]byte = map[string][]byte{
+	"vulnmap/terraform.rego":          vulnmapTerraformRego,
+	"vulnmap/relations.rego":          vulnmapRelationsRego,
+	"vulnmap/internal/relations.rego": vulnmapInternalRelationsRego,
 }

@@ -4,11 +4,11 @@
 # By adding this metadata, the policy engine can derive which resources were
 # examined.  This way, we can infer which resources were compliant for this
 # rule, in addition to the noncompliant ones.
-package rules.khulnasoft_004.tf
+package rules.vulnmap_004.tf
 
-import data.khulnasoft
+import data.vulnmap
 
-buckets = khulnasoft.resources("aws_s3_bucket")
+buckets = vulnmap.resources("aws_s3_bucket")
 
 has_bucket_name(bucket) {
 	is_string(bucket.bucket)

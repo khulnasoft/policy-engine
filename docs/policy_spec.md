@@ -27,19 +27,19 @@ This document describes the contract and API for policies that run in the policy
       - [Multi-resource policy examples](#multi-resource-policy-examples)
     - [Missing-resource policy](#missing-resource-policy)
       - [Missing-resource policy examples](#missing-resource-policy-examples)
-  - [The `khulnasoft` API](#the-khulnasoft-api)
-    - [`khulnasoft.resources(<resource type>)`](#khulnasoftresourcesresource-type)
-      - [Example `khulnasoft.resources` call and output](#example-khulnasoftresources-call-and-output)
-    - [`khulnasoft.query(<query>)`](#khulnasoftqueryquery)
-    - [`khulnasoft.relates(<resource>, <relation name>)`](#khulnasoftrelatesresource-relation-name)
-      - [`khulnasoft.back_relates(<relation name>, <resource>)`](#khulnasoftback_relatesrelation-name-resource)
-      - [`khulnasoft.relates_with(<resource>, <relation name>)`](#khulnasoftrelates_withresource-relation-name)
-      - [`khulnasoft.back_relates_with(<relation name>, <resource>)`](#khulnasoftback_relates_withrelation-name-resource)
-    - [`khulnasoft.input_resource_types`](#khulnasoftinput_resource_types)
-      - [Example khulnasoft.input\_resource\_types usage](#example-khulnasoftinput_resource_types-usage)
-    - [`khulnasoft.input_type`](#khulnasoftinput_type)
-      - [Example `khulnasoft.input_type` usage](#example-khulnasoftinput_type-usage)
-    - [`khulnasoft.terraform.resource_provider_version_constraint(<resource>, <constraint>)`](#khulnasoftterraformresource_provider_version_constraintresource-constraint)
+  - [The `vulnmap` API](#the-vulnmap-api)
+    - [`vulnmap.resources(<resource type>)`](#vulnmapresourcesresource-type)
+      - [Example `vulnmap.resources` call and output](#example-vulnmapresources-call-and-output)
+    - [`vulnmap.query(<query>)`](#vulnmapqueryquery)
+    - [`vulnmap.relates(<resource>, <relation name>)`](#vulnmaprelatesresource-relation-name)
+      - [`vulnmap.back_relates(<relation name>, <resource>)`](#vulnmapback_relatesrelation-name-resource)
+      - [`vulnmap.relates_with(<resource>, <relation name>)`](#vulnmaprelates_withresource-relation-name)
+      - [`vulnmap.back_relates_with(<relation name>, <resource>)`](#vulnmapback_relates_withrelation-name-resource)
+    - [`vulnmap.input_resource_types`](#vulnmapinput_resource_types)
+      - [Example vulnmap.input\_resource\_types usage](#example-vulnmapinput_resource_types-usage)
+    - [`vulnmap.input_type`](#vulnmapinput_type)
+      - [Example `vulnmap.input_type` usage](#example-vulnmapinput_type-usage)
+    - [`vulnmap.terraform.resource_provider_version_constraint(<resource>, <constraint>)`](#vulnmapterraformresource_provider_version_constraintresource-constraint)
   - [Resource relations specification](#resource-relations-specification)
   - [Types reference](#types-reference)
     - [State object](#state-object)
@@ -54,13 +54,13 @@ This document describes the contract and API for policies that run in the policy
 This document uses the term "policy" to refer to an OPA package in one or more rego
 files that the policy engine queries in order to evaluate some input. This is mainly
 done to disambiguate "rules" in the Open Policy Agent terminology (which is used
-extensively throughout this document) from what Khulnasoft refers to as a rule elsewhere.
+extensively throughout this document) from what Vulnmap refers to as a rule elsewhere.
 
 ## Policy requirements
 
 1. Policies must be in a sub-package of `rules`. Examples of valid package declarations:
     - `package rules.my_rule`
-    - `package rules.khulnasoft_007.tf`
+    - `package rules.vulnmap_007.tf`
     
 2. Policies must have an `input_type` set. 
 
@@ -82,7 +82,7 @@ The current list of valid values for this rule are:
 * `tf_hcl` (Terraform HCL)
 * `tf_plan` (Terraform plan file)
 * `tf_state` (Terraform state file)
-* `cloud_scan` (State produced by Khulnasoft Cloud)
+* `cloud_scan` (State produced by Vulnmap Cloud)
 * `cfn` (Cloudformation template)
 * `k8s` (Kubernetes manifest)
 * `arm` (Azure ARM template)
@@ -357,7 +357,7 @@ evaluates single-resource policies by querying the `deny[info]` rule with the `i
 document set to a single [resource object](#resource-object)
 
 By definition, single resource policies only interact with a single resource. Therefore,
-the `khulnasoft.resources()` function is not useable in single-resource policies.
+the `vulnmap.resources()` function is not useable in single-resource policies.
 
 #### Single-resource policy examples
 
@@ -371,7 +371,7 @@ Multi-resource policies are distinguished by setting the
 multi-resource policies by querying the `deny[info]` rule with the `input` document set
 to the entire `State` object being evaluated. Although multi-resource policies can
 access individual resources via the `input` document, they should use the
-`khulnasoft.resources()` function to retrieve resources from the input by resource type.
+`vulnmap.resources()` function to retrieve resources from the input by resource type.
 
 #### Multi-resource policy examples
 
@@ -403,40 +403,40 @@ deny[info] {
 
 * [examples/08-missing.rego](../examples/08-missing.rego)
 
-## The `khulnasoft` API
+## The `vulnmap` API
 
-The policy engine provides a set of functions under the `khulnasoft` namespace that can be
-used by policies. To use them, policies should `import data.khulnasoft`, like is shown in the
+The policy engine provides a set of functions under the `vulnmap` namespace that can be
+used by policies. To use them, policies should `import data.vulnmap`, like is shown in the
 [multi-resource policy examples](#multi-resource-policy-examples).
 
-### `khulnasoft.resources(<resource type>)`
+### `vulnmap.resources(<resource type>)`
 
-The `khulnasoft.resources` function takes in a single resource type string and returns an
+The `vulnmap.resources` function takes in a single resource type string and returns an
 array of [resource objects](#resource-objects) of that type from the current `State`
 being evaluated.
 If no resources of that type are known an empty array is returned.
 
-Internally, the policy engine tracks calls to `khulnasoft.resources` (and
-`khulnasoft.query`) to produce the `resource_types` array in the results output. This
+Internally, the policy engine tracks calls to `vulnmap.resources` (and
+`vulnmap.query`) to produce the `resource_types` array in the results output. This
 array may be used by downstream consumers to add context to policy results. For
 example, a consumer may need to communicate that some policy results were
 inconclusive if the resource types used by the policy were not surveyed. For
-this reason, some policies should be written to call `khulnasoft.resources` for a
+this reason, some policies should be written to call `vulnmap.resources` for a
 particular type _only if_ that resource type exists in the input. See
-[`khulnasoft.input_resource_types`](#khulnasoftinput_resource_types) below for an example of
+[`vulnmap.input_resource_types`](#vulnmapinput_resource_types) below for an example of
 this idiom.
 
-`khulnasoft.resources("some-type")` return equivalent results to (and is a special
-case of) `khulnasoft.query({"resource_type": "some-type", "scope": {}})`.
+`vulnmap.resources("some-type")` return equivalent results to (and is a special
+case of) `vulnmap.query({"resource_type": "some-type", "scope": {}})`.
 
-#### Example `khulnasoft.resources` call and output
+#### Example `vulnmap.resources` call and output
 
-This example demonstrates the `khulnasoft.resources` input and output in a REPL session:
+This example demonstrates the `vulnmap.resources` input and output in a REPL session:
 
 ```sh
 $ ./policy-engine repl examples/main.tf
-> import data.khulnasoft
-> khulnasoft.resources("aws_cloudtrail")
+> import data.vulnmap
+> vulnmap.resources("aws_cloudtrail")
 [
   {
     "_filepath": "examples/main.tf",
@@ -456,7 +456,7 @@ $ ./policy-engine repl examples/main.tf
 > 
 ```
 
-### `khulnasoft.query(<query>)`
+### `vulnmap.query(<query>)`
 
 Queries the input for resources.
 
@@ -477,7 +477,7 @@ custom resource resolvers
 A simple query:
 
 ```
-khulnasoft.query({
+vulnmap.query({
   "resource_type": "aws_cloudtrail",
   "scope": {},
 })
@@ -490,7 +490,7 @@ metadata was added by the loader).
 In an IaC context, this query:
 
 ```
-khulnasoft.query({
+vulnmap.query({
   "resource_type": "aws_cloudtrail",
   "scope": {
     "filename": "main.tf",
@@ -510,7 +510,7 @@ resolvers might fetch such resources from a place other than the input.
 This query:
 
 ```
-khulnasoft.query({
+vulnmap.query({
   "resource_type": "aws_cloudtrail",
   "scope": {
     "foo": "bar",
@@ -526,14 +526,14 @@ region/account, or IaC filename, module name).
 UPE policies that make queries with specific scope will likely be rarer than
 ones that do not, because they implicitly rely on the behavior of loaders and/or
 custom resolvers. Queries that do not make use of specific scope, only
-requesting resources by type, can use `khulnasoft.resources()` instead if the author
-wishes, which is backed by the same implemenation as `khulnasoft.query()`, but should
+requesting resources by type, can use `vulnmap.resources()` instead if the author
+wishes, which is backed by the same implemenation as `vulnmap.query()`, but should
 never trigger the custom resolver chain, since the most permissive scope is
 always used.
 
-### `khulnasoft.relates(<resource>, <relation name>)`
+### `vulnmap.relates(<resource>, <relation name>)`
 
-`khulnasoft.relates` returns a list of right resources that match the given left
+`vulnmap.relates` returns a list of right resources that match the given left
 resource and relationship name.
 
 For more info, see:
@@ -542,31 +542,31 @@ For more info, see:
  -  [The resource relations design](design/resource-relations.md)
  -  [Resource relations specification](#resource-relations-specification)
 
-#### `khulnasoft.back_relates(<relation name>, <resource>)`
+#### `vulnmap.back_relates(<relation name>, <resource>)`
 
-`khulnasoft.back_relates` is the inverse of `khulnasoft.relates`, and returns a list of left
+`vulnmap.back_relates` is the inverse of `vulnmap.relates`, and returns a list of left
 resources that match the given right resource and relationship name.
 
-#### `khulnasoft.relates_with(<resource>, <relation name>)`
+#### `vulnmap.relates_with(<resource>, <relation name>)`
 
-`khulnasoft.relates_with` is a version of `khulnasoft.relates` that returns a list of
+`vulnmap.relates_with` is a version of `vulnmap.relates` that returns a list of
 pairs of `[resource, annotation]` rather than just a list of resources.
 
-#### `khulnasoft.back_relates_with(<relation name>, <resource>)`
+#### `vulnmap.back_relates_with(<relation name>, <resource>)`
 
-`khulnasoft.back_relates_with` is a version of `khulnasoft.back_relates` that returns a list
+`vulnmap.back_relates_with` is a version of `vulnmap.back_relates` that returns a list
 of pairs of `[resource, annotation]` rather than just a list of resources.
 
-### `khulnasoft.input_resource_types`
+### `vulnmap.input_resource_types`
 
-`khulnasoft.input_resource_types` is a `set` of all resource types in the input. This can be
+`vulnmap.input_resource_types` is a `set` of all resource types in the input. This can be
 useful in policies that _can_ check multiple resource types, but don't _require_ them to
 produce conclusive results. A common example of this type of policy is one that enforces
 specific tags across many different resource types. Another common example are policies
 that are written to work with multiple [input types](#input_type), like policies with
 the `tf` input type.
 
-#### Example khulnasoft.input_resource_types usage
+#### Example vulnmap.input_resource_types usage
 
 This example is from a policy that's written for the `tf` input type. `tf` is an
 aggregate input type that includes some IaC inputs as well as the `cloud_scan` input
@@ -582,18 +582,18 @@ infrastructure.
 # The result is that when no data.aws_iam_policy_document resources exist in the input,
 # this object will be empty.
 policy_documents := {id: doc |
-	khulnasoft.input_resource_types["data.aws_iam_policy_document"]
-	doc := khulnasoft.resources("data.aws_iam_policy_document")[_]
+	vulnmap.input_resource_types["data.aws_iam_policy_document"]
+	doc := vulnmap.resources("data.aws_iam_policy_document")[_]
 }
 ```
 
-### `khulnasoft.input_type`
+### `vulnmap.input_type`
 
-`khulnasoft.input_type` gets set to the [input type](#input_type) of the current input being
+`vulnmap.input_type` gets set to the [input type](#input_type) of the current input being
 evaluated. This can be useful in policies that are written for multiple but only need to
 enforce a particular condition in one of those input types.
 
-#### Example `khulnasoft.input_type` usage
+#### Example `vulnmap.input_type` usage
 
 This is example is taken from a policy that enforces some configuration on
 `aws_iam_account_password_policy` resources. For `cloud_scan` inputs, we also want to
@@ -603,7 +603,7 @@ enforce that this resource exists (as in the
 ```open-policy-agent
 password_policy_type := "aws_iam_account_password_policy"
 
-password_policies := khulnasoft.resources(password_policy_type)
+password_policies := vulnmap.resources(password_policy_type)
 password_policy_exists {
   _ = password_policies[_]
 }
@@ -619,7 +619,7 @@ deny[info] {
 
 deny[info] {
   # We only want this condition to apply to cloud_scan inputs
-  khulnasoft.input_type == "cloud_scan"
+  vulnmap.input_type == "cloud_scan"
   info := {
     "resource_type": password_policy_type,
     "message": "No IAM password policy was found."
@@ -627,7 +627,7 @@ deny[info] {
 }
 ```
 
-### `khulnasoft.terraform.resource_provider_version_constraint(<resource>, <constraint>)`
+### `vulnmap.terraform.resource_provider_version_constraint(<resource>, <constraint>)`
 
 This function takes a resource and a version constraint for the terraform
 provider, for example `">= 4"` or `"~>3, != 3.0.1"`.  You can see the full
@@ -664,7 +664,7 @@ Relationships are defined in separate files and must extend the
 ```rego
 package relations
 
-import data.khulnasoft
+import data.vulnmap
 
 relations[info] {
 	info := {
@@ -695,7 +695,7 @@ object is defined in the [`swagger.yaml` file](../swagger.yaml), which is then u
 generate [a model struct](../pkg/models/model_state.go).
 
 In general, policies should not interact with the state object directly and should
-instead use [the `khulnasoft` API](#the-khulnasoft-api).
+instead use [the `vulnmap` API](#the-vulnmap-api).
 
 ### Resource objects
 
@@ -753,7 +753,7 @@ set to a single resource object of the type specified in the
 
 In [multi-resource policies](#multi-resource-policy) and
 [missing-resource policies](#missing-resource-policy), resource objects should be
-obtained via the [`khulnasoft.resources`](#khulnasoftresourcesresource-type) function.
+obtained via the [`vulnmap.resources`](#vulnmapresourcesresource-type) function.
 
 ### Attribute paths
 

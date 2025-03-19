@@ -1,6 +1,6 @@
 # The package name for tests is arbitrary but should not start with `rules.`
 # just to avoid confusion.
-package rules.khulnasoft_003.tf
+package rules.vulnmap_003.tf
 
 # We need to import the fixture we generated.
 import data.examples.main

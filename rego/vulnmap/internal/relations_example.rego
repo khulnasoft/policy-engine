@@ -14,18 +14,18 @@
 
 package relations
 
-import data.khulnasoft
+import data.vulnmap
 
 # Relations for unit tests.
 relations[info] {
 	# Only include these relations when this input flag is specified as a safety
 	# measure.
-	input.khulnasoft_relations_test
+	input.vulnmap_relations_test
 	info := {
 		"name": "bucket_settings",
 		"keys": {
-			"left": [[b, b.id] | b := khulnasoft.resources("bucket")[_]],
-			"right": [[l, l.bucket] | l := khulnasoft.resources("bucket_settings")[_]],
+			"left": [[b, b.id] | b := vulnmap.resources("bucket")[_]],
+			"right": [[l, l.bucket] | l := vulnmap.resources("bucket_settings")[_]],
 		},
 	}
 }
@@ -34,12 +34,12 @@ relations[info] {
 relations[info] {
 	# Only include these relations when this input flag is specified as a safety
 	# measure.
-	input.khulnasoft_relations_test
+	input.vulnmap_relations_test
 	info := {
 		"name": "bucket_logging",
 		"explicit": [[b, l] |
-			b := khulnasoft.resources("bucket")[_]
-			l := khulnasoft.resources("bucket_logging")[_]
+			b := vulnmap.resources("bucket")[_]
+			l := vulnmap.resources("bucket_logging")[_]
 			l.bucket == b.id
 		],
 	}
@@ -49,15 +49,15 @@ relations[info] {
 relations[info] {
 	# Only include these relations when this input flag is specified as a safety
 	# measure.
-	input.khulnasoft_relations_test
+	input.vulnmap_relations_test
 	info := {
 		"name": "bucket_acl",
 		"keys": {
 			"left": [[b, k] |
-				b := khulnasoft.resources("bucket")[_]
+				b := vulnmap.resources("bucket")[_]
 				k := b[{"id", "bucket"}[_]]
 			],
-			"right": [[l, l.bucket] | l := khulnasoft.resources("bucket_acl")[_]],
+			"right": [[l, l.bucket] | l := vulnmap.resources("bucket_acl")[_]],
 		},
 	}
 }
@@ -67,23 +67,23 @@ relations[info] {
 relations[info] {
 	# Only include these relations when this input flag is specified as a safety
 	# measure.
-	input.khulnasoft_relations_test
+	input.vulnmap_relations_test
 	info := {
 		"name": "security_group",
 		"keys": {
 			"left": array.concat(
 				[[r, egress.security_group_id, ann] |
-					r := khulnasoft.resources("security_group")[_]
+					r := vulnmap.resources("security_group")[_]
 					egress := r.egress[_]
 					ann := {"type": "egress", "port": egress.port}
 				],
 				[[r, ingress.security_group_id, ann] |
-					r := khulnasoft.resources("security_group")[_]
+					r := vulnmap.resources("security_group")[_]
 					ingress := r.ingress[_]
 					ann := {"type": "ingress", "port": ingress.port}
 				],
 			),
-			"right": [[r, r.id] | r := khulnasoft.resources("security_group")[_]],
+			"right": [[r, r.id] | r := vulnmap.resources("security_group")[_]],
 		},
 	}
 }
@@ -93,13 +93,13 @@ relations[info] {
 relations[info] {
 	# Only include these relations when this input flag is specified as a safety
 	# measure.
-	input.khulnasoft_relations_test
+	input.vulnmap_relations_test
 	info := {
 		"name": "forwards_to",
 		"explicit": [[l, r, ann] |
-			l := khulnasoft.resources("load_balancer")[_]
+			l := vulnmap.resources("load_balancer")[_]
 			forward := l.forward[_]
-			r := khulnasoft.resources("application")[_]
+			r := vulnmap.resources("application")[_]
 			forward.application == r.id
 			ann := {"port": forward.port}
 		],

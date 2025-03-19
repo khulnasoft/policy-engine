@@ -15,7 +15,7 @@ jobs:
       with:
         ref: main
         submodules: true
-    - uses: actions/setup-go@v3
+    - uses: actions/setup-go@v4
       with:
         go-version: '1.18'
     - run: make install_tools

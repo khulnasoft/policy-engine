@@ -1,8 +1,8 @@
 package rules.norulekey
 
-import data.khulnasoft
+import data.vulnmap
 
-buckets = khulnasoft.resources("aws_s3_bucket")
+buckets = vulnmap.resources("aws_s3_bucket")
 
 bucket_name_contains(bucket, needle) {
 	is_string(bucket.bucket)
