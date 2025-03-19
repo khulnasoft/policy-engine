@@ -14,7 +14,7 @@
 
 package rules.playlist_guardrails
 
-import data.khulnasoft
+import data.vulnmap
 
 input_type := "tf"
 
@@ -22,7 +22,7 @@ resource_type := "MULTIPLE"
 
 metadata := {"title": "Playlist lacks cowbell"}
 
-playlists := khulnasoft.resources("spotify_playlist")
+playlists := vulnmap.resources("spotify_playlist")
 
 includes_boc(playlist) {
 	track := playlist.tracks[_]

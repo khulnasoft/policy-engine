@@ -18,9 +18,9 @@ import (
 	"errors"
 )
 
-// FailedToLoadRegoAPI indicates that an error occurred while initializing the khulnasoft
+// FailedToLoadRegoAPI indicates that an error occurred while initializing the vulnmap
 // Rego API.
-var FailedToLoadRegoAPI = errors.New("Failed to load the khulnasoft Rego API")
+var FailedToLoadRegoAPI = errors.New("Failed to load the vulnmap Rego API")
 
 // FailedToLoadRules indicates that an error occurred while consuming the rego and data
 // producers provided to the engine.

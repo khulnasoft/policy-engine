@@ -75,7 +75,7 @@ func TestResourceFilter(t *testing.T) {
 		},
 		RuleResults: []models.RuleResults{
 			{
-				Id: "KHULNASOFT-ABC-01",
+				Id: "VULNMAP-ABC-01",
 				Results: []models.RuleResult{
 					{
 						Passed:            false,
@@ -154,7 +154,7 @@ func TestResourceFilter(t *testing.T) {
 			},
 		},
 		RuleResults: []models.RuleResults{{
-			Id: "KHULNASOFT-ABC-01",
+			Id: "VULNMAP-ABC-01",
 			Results: []models.RuleResult{
 				{
 					Passed:            false,

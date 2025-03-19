@@ -12,9 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-package khulnasoft_test
+package vulnmap_test
 
-import data.khulnasoft
+import data.vulnmap
 
 test_resource_id {
 	# Test that we set id and _id in the same way as the Go code. For id, that's:
@@ -40,7 +40,7 @@ test_resource_id {
 	}}}
 
 	buckets_by_logical_id := {id: bucket |
-		bucket := khulnasoft.resources("aws_s3_bucket")[_]
+		bucket := vulnmap.resources("aws_s3_bucket")[_]
 		id := bucket._id
 	} with input as mock_input
 

@@ -2,6 +2,11 @@
 
 
 
+## v0.30.3 - 2023-10-11
+### Fixed
+* count and for_each appearing in attributes
+* upgraded http2 and google-storage and grpc to remove DoS vulns
+
 ## v0.30.2 - 2023-09-29
 ### Added
 * add catalog-info.yaml for asset classification
@@ -40,7 +45,7 @@
 ### Changed
 * BREAKING: EvalOptions now takes a ResourcesQueryCache instead of a ResourcesResolver
 ### Fixed
-* ensure `khulnasoft.resources()` are returned in a deterministic order
+* ensure `vulnmap.resources()` are returned in a deterministic order
 ### Updated
 * remove __resources_by_type builtin
 * refactor unmarshalling of resources query
@@ -50,9 +55,9 @@
 * capabilities subcommand
 * upload extra files to github releases
 ### Fixed
-* Don't khulnasoft-monitor on build
+* Don't vulnmap-monitor on build
 ### Security
-* Khulnasoft code and dependency scanning
+* Vulnmap code and dependency scanning
 
 ## v0.27.0 - 2023-07-25
 ### Added
@@ -134,7 +139,7 @@
 ### Added
 * cloud resources options to repl command
 * docs around security aspects
-* khulnasoft.relation_from_fields helper function for writing relations rules
+* vulnmap.relation_from_fields helper function for writing relations rules
 ### Fixed
 * missing denied resources in one case for fugue rules
 
@@ -147,7 +152,7 @@
 * complete bundle example
 * bug where HCL syntax errors were being treated as non-fatal
 ### Updated
-* .khulnasoft MPL 2.0 ignores
+* .vulnmap MPL 2.0 ignores
 * Copyright headers
 
 ## v0.18.3 - 2023-02-20
@@ -218,7 +223,7 @@
 ### Added
 * resource relationships
 ### Fixed
-* return empty arrays from khulnasoft.(back_)relates if nothing found
+* return empty arrays from vulnmap.(back_)relates if nothing found
 * respect -v flag in test reporter
 
 ## v0.12.2 - 2022-11-15
@@ -320,12 +325,12 @@
 
 ## v0.4.0 - 2022-08-01
 ### Added
-* docs: clarify empty array result from khulnasoft.resources
+* docs: clarify empty array result from vulnmap.resources
 * Accumulate errors in TF loader instead of printing warnings.  They are available under `loader.Errors()`
 ### Changed
 * Default behavior for `input_type`. After this change, policies that do not define an `input_type` rule will be evaluated for all input types.
 ### Fixed
-* docs: update example for array result of khulnasoft.resources() 
+* docs: update example for array result of vulnmap.resources() 
 * sync models code and swagger
 * Compatibility issues with legacy IaC rules (see #82 for more information)
 * ARM parser to capture all resource attributes
@@ -364,7 +369,7 @@
 ## v0.1.0 - 2022-07-05
 ### Added
 * allow tests to be filtered by name
-* Proposal for `khulnasoft.matches_snapshot()` builtin
+* Proposal for `vulnmap.matches_snapshot()` builtin
 * Support for legacy IaC rules
 * VarFiles option
 * Engine performance improvements and configurable rule evaluation workers

@@ -3,11 +3,11 @@
 #
 # This advanced rule checks for privileged mode in containers, and as such may
 # return multiple attributes, as multiple containers may be in violation.
-package rules.khulnasoft_007.tf
+package rules.vulnmap_007.tf
 
-import data.khulnasoft
+import data.vulnmap
 
-pods := khulnasoft.resources("kubernetes_pod")
+pods := vulnmap.resources("kubernetes_pod")
 
 is_privileged(container) {
 	container.security_context[0].privileged == true

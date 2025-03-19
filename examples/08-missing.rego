@@ -4,17 +4,17 @@
 #
 # In this example, we verify that at least one cloudtrail is present that has
 # `include_global_service_events` set to true.
-package rules.khulnasoft_008.tf
+package rules.vulnmap_008.tf
 
-import data.khulnasoft
+import data.vulnmap
 
-metadata := data.rules.khulnasoft_007.metadata
+metadata := data.rules.vulnmap_007.metadata
 
 # Not all cloudtrails are relevant for this validation.  If a specific trail
 # doesn't have this set, it is not necessarily noncompliant: it could be
 # unrelated.  This is why we just grab the relevant ones here.
 global_cloudtrails = [cloudtrail |
-	cloudtrail := khulnasoft.resources("aws_cloudtrail")[_]
+	cloudtrail := vulnmap.resources("aws_cloudtrail")[_]
 	cloudtrail.include_global_service_events == true
 ]
 

@@ -104,12 +104,12 @@ func TestFugueRules(t *testing.T) {
 	utils.GoldenTest(t, "fuguerules.json", bytes)
 }
 
-func TestKhulnasoftRules(t *testing.T) {
+func TestVulnmapRules(t *testing.T) {
 	results := RunEngine(
 		t,
 		&engine.EngineOptions{
 			Providers: []data.Provider{
-				data.LocalProvider("khulnasoftrules"),
+				data.LocalProvider("vulnmaprules"),
 			},
 		},
 		"../examples/main.tf",
@@ -117,7 +117,7 @@ func TestKhulnasoftRules(t *testing.T) {
 	assert.Len(t, results.Results, 1)
 	bytes, err := json.MarshalIndent(results.Results[0].RuleResults, "", "  ")
 	assert.NoError(t, err)
-	utils.GoldenTest(t, "khulnasoftrules.json", bytes)
+	utils.GoldenTest(t, "vulnmaprules.json", bytes)
 }
 
 func TestRegression(t *testing.T) {
